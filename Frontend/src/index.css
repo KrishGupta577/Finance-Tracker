@@ -1,0 +1,24 @@
+:root{
+    --bg-color: rgb(245, 245, 245);
+    --text-color: rgb(66, 66, 66);
+    --button-color: rgb(76, 175, 80);
+    --button-hover-color: rgb(56, 142, 60);
+    --secondary-bg-color: rgb(255, 255, 255);
+    --secondary-text-color: rgb(158, 158, 158);
+    --input-bg-color: rgb(232, 245, 233);
+    --border-color: rgb(102, 187, 106);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    color: var(--text-color);
+}
+
+body{
+    width: 100vw;
+}
