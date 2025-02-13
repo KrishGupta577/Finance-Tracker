@@ -1,0 +1,42 @@
+.hero{
+    height: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.hero-left{
+    width: 40%;
+}
+
+.hero-left h1{
+    text-align: start;
+    margin-top: 140px;
+    color: var(--button-color);
+}
+
+.hero-left p{
+    font-size: 20px;
+    margin: 20px 0px;
+    margin-bottom: 40px;
+}
+
+.hero-left > a{
+    margin: 20px 0px;
+    background-color: var(--button-color);
+    color: white;
+    /* border: 1px solid black; */
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hero-left a:hover{
+    background-color: var(--button-hover-color);
+}
+
+.hero-right{
+    display: flex;
+    align-items: center;
+}

@@ -5,7 +5,7 @@ const Contact = () => {
     return (
         <div className='contact' id='contact'>
             <div className='contact-left'>
-                <h3>CONTACT</h3>
+                <h3>CONTACT US</h3>
                 <h1>Let's Work Together</h1>
                 <p className='contact-left-address'>500 Terry Francine St. San Francisco, CA 94158</p>
                 <a href='mailto:financetracker555@gmail.com' className='contact-left-email'>financetracker555@gmail.com</a>

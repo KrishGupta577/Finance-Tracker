@@ -21,6 +21,7 @@
 .navbar-left img{
     width: 150px;
     height: 100px;
+    cursor: pointer;
 }
 
 .navbar-centre{
@@ -32,17 +33,19 @@
 .navbar-centre span a {
     text-decoration: none;
     transition: 0.1s;
+    font-size: 20px;
 }
 
 .navbar-centre span a:hover {
     border-bottom: 1px solid black;
+    color: var(--button-color);
 }
 
 .navbar-right{
     width: 20%;
     /* border: 2px solid black; */
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 .navbar-right a{
@@ -50,7 +53,7 @@
     border-radius:40px;
     padding: 5px;
     text-decoration: none;
-    width: 50%;
+    width: 40%;
     text-align: center;
     color: white;
     background-color: var(--button-color);

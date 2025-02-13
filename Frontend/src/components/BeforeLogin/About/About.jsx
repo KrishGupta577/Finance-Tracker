@@ -39,7 +39,7 @@ const About = () => {
             <div className='about-card'>
                 {aboutInformation.map((info, index) => (
                     <div className='about-card-one' key={index}>
-                        <CheckCircle className='about-card-icon' />
+                        <CheckCircle color='var(--button-color)' />
                         <h3 className='about-card-title'>{info.title}</h3>
                         <div className='about-card-desc'>{info.description}</div>
                     </div>
@@ -53,7 +53,7 @@ const About = () => {
                             <h2>{info.title}</h2>
                             {info.desc.map((i, index) => (
                                 <div className='about-content-card-one-content' key={index}>
-                                    <CheckCircle className='about-content-icon' />
+                                    <CheckCircle color='var(--button-color)' />
                                     <p>{i}</p>
                                 </div>
                             ))}

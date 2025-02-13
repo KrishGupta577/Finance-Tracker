@@ -1,16 +1,15 @@
 import './App.css'
-import About from './components/BeforeLogin/About/About'
-import Contact from './components/BeforeLogin/Contact/Contact'
-import Navbar from './components/BeforeLogin/Navbar/Navbar'
-import Footer from './components/Footer/Footer'
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+
 
 function App() {
   return (
     <>
-      <Navbar />
-      <About />
-      <Contact />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        
+      </Routes>
     </>
   )
 }
