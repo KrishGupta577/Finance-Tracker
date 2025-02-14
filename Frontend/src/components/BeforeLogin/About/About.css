@@ -1,6 +1,6 @@
-.about{
+.about {
     background-color: var(--bg-color);
-    height: 70%;
+    min-height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,81 +8,178 @@
     padding: 30px;
 }
 
-.about-heading{
+.about-heading {
     display: flex;
     flex-direction: column;
     gap: 20px;
     animation: containerFadeIn 2s ease;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.about-heading h1{
+.about-heading h1 {
     color: var(--button-color);
     text-align: center;
 }
 
-.about-heading p{
+.about-heading p {
     text-align: center;
     font-size: 20px;
 }
 
-.about-cards{
+.about-cards {
     display: flex;
     padding: 40px 0px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
-.about-card{
-   border: 1px solid var(--border-color);
-   margin: 20px 10px;
-   padding: 20px;
-   border-radius: 20px;
-   box-shadow: 0 1px 3px var(--button-color);
-   transition: all 0.5s;
-   animation: containerFadeIn 2s ease;
+.about-card {
+    border: 1px solid var(--border-color);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px var(--button-color);
+    transition: all 0.5s;
+    animation: containerFadeIn 2s ease;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
 }
 
-.about-card:hover{
+.about-card:hover {
     transform: scale(1.05);
 }
 
-.about-content{
+.about-content {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.about-content h1{
+.about-content h1 {
     color: var(--button-color);
     text-align: center;
+    margin: 20px 0;
 }
 
-.about-content-cards{
+.about-content-cards {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }
 
-.about-content-card{
+.about-content-card {
     animation: containerFadeIn 2s ease;
     border: 1px solid var(--border-color);
     padding: 20px;
-    margin: 30px;
+    margin: 10px;
     border-radius: 30px;
     box-shadow: 0 1px 3px var(--button-color);
-   transition: all 0.5s;
+    transition: all 0.5s;
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
 }
 
-.about-content-card:hover{
+.about-content-card:hover {
     transform: scale(1.05);
 }
 
-.about-content-card h2{
+.about-content-card h2 {
     text-align: center;
     margin-bottom: 30px;
 }
 
-.about-content-card-content{
+.about-content-card-content {
     display: flex;
     gap: 10px;
     margin: 10px;
+    align-items: center;
 }
 
-.about-content-card-content p{
+.about-content-card-content p {
     font-size: 20px;
+}
+
+.about-card-title {
+    margin: 15px 0;
+}
+
+.about-card-desc {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+    .about {
+        padding: 20px 15px;
+    }
+
+    .about-heading h1 {
+        font-size: 24px;
+    }
+
+    .about-heading p {
+        font-size: 16px;
+    }
+
+    .about-cards {
+        padding: 20px 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-card {
+        margin: 10px 0;
+        width: 80%;
+        max-width: none;
+    }
+
+    .about-content h1 {
+        font-size: 24px;
+    }
+
+    .about-content-cards {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .about-content-card {
+        margin: 10px 0;
+        width: 80%;
+        max-width: none;
+    }
+
+    .about-content-card h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .about-content-card-content p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .about-heading h1 {
+        font-size: 20px;
+    }
+
+    .about-heading p {
+        font-size: 14px;
+    }
+
+    .about-card {
+        padding: 15px;
+    }
+
+    .about-content-card {
+        padding: 15px;
+    }
 }

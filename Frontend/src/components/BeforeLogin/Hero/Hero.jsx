@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Hero.css"
-import { LineChart, Line,XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Link } from 'react-router-dom';
 
 const Hero = ({setShowLogin}) => {
+    const [chartWidth, setChartWidth] = useState(500);
+    const [chartHeight, setChartHeight] = useState(300);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setChartWidth(window.innerWidth - 40); // Account for padding
+                setChartHeight(250);
+            } else {
+                setChartWidth(500);
+                setChartHeight(300);
+            }
+        };
+
+        handleResize(); // Initial call
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const chartData = [
         { month: 'Jan', savings: 1500 },
@@ -11,7 +32,7 @@ const Hero = ({setShowLogin}) => {
         { month: 'Mar', savings: 3200 },
         { month: 'Apr', savings: 4100 },
         { month: 'May', savings: 5000 },
-      ];
+    ];
       
     return (
         <div className='hero'>
@@ -22,7 +43,7 @@ const Hero = ({setShowLogin}) => {
             </div>
 
             <div className="hero-right">
-                <LineChart width={500} height={300} data={chartData}>
+                <LineChart width={chartWidth} height={chartHeight} data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
                     <YAxis />

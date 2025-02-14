@@ -33,7 +33,7 @@
     gap: 20px;
 }
 
-.contact-center .contact-center-links{
+.contact-center-links{
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -46,27 +46,27 @@
     width: 20%;
 }
 
-.contact-right .contact-right-feedback{
+.contact-right-feedback{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.contact-right .contact-right-feedback .contact-right-feedback-email{
+.contact-right-feedback-email{
     width: 85%;
     height: 30px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
 }
 
-.contact-right .contact-right-feedback .contact-right-feedback-input{
+.contact-right-feedback-input{
     width: 85%;
     height: 100px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
 }
 
-.contact-right .contact-right-feedback button{
+.contact-right-feedback button{
     width: 40%;
     height: 30px;
     background-color: var(--button-color);
@@ -78,6 +78,30 @@
     color: white;
 }
 
-.contact-right .contact-right-feedback button:hover{
+.contact-right-feedback button:hover{
     background-color: var(--button-hover-color);
+}
+
+@media (max-width: 768px) {
+    .contact {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .contact-left, .contact-center, .contact-right {
+        width: 100%;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .contact-left .contact-left-icons {
+        justify-content: center;
+    }
+
+    .contact-right .contact-right-feedback input,
+    .contact-right .contact-right-feedback button {
+        width: 100%;
+    }
 }

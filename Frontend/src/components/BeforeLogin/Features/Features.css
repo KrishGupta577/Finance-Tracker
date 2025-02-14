@@ -39,3 +39,26 @@
 .features-card:hover{
     transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+    .features {
+        padding: 20px;
+    }
+
+    .features-heading p {
+        font-size: 16px;
+    }
+
+    .features-cards {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 20px;
+    }
+
+    .features-card {
+        padding: 15px;
+    }
+
+    .features-card p{
+        display: none;
+    }
+}
