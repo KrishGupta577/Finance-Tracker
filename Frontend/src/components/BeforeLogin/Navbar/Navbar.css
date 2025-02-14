@@ -30,6 +30,14 @@
     justify-content: space-evenly;
 }
 
+.navbar-centre span{
+    transition: all 0.5s;
+}
+
+.navbar-centre span:hover{
+    transform: scale(1.10);
+}
+
 .navbar-centre span a {
     text-decoration: none;
     transition: 0.1s;

@@ -36,9 +36,9 @@ const About = () => {
                 <h1>Take Control of Your Financial Journey</h1>
                 <p>Finance Tracker is your personal financial companion, helping you make smarter decisions about your money through intuitive tracking and powerful insights.</p>
             </div>
-            <div className='about-card'>
+            <div className='about-cards'>
                 {aboutInformation.map((info, index) => (
-                    <div className='about-card-one' key={index}>
+                    <div className='about-card' key={index}>
                         <CheckCircle color='var(--button-color)' />
                         <h3 className='about-card-title'>{info.title}</h3>
                         <div className='about-card-desc'>{info.description}</div>
@@ -47,12 +47,12 @@ const About = () => {
             </div>
             <div className='about-content'>
                 <h1>Why Choose Finance Tracker?</h1>
-                <div className='about-content-card'>
+                <div className='about-content-cards'>
                     {aboutContent.map((info, index) => (
-                        <div className='about-content-card-one' key={index}>
+                        <div className='about-content-card' key={index}>
                             <h2>{info.title}</h2>
                             {info.desc.map((i, index) => (
-                                <div className='about-content-card-one-content' key={index}>
+                                <div className='about-content-card-content' key={index}>
                                     <CheckCircle color='var(--button-color)' />
                                     <p>{i}</p>
                                 </div>

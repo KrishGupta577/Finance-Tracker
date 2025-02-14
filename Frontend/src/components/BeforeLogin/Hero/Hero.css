@@ -12,12 +12,14 @@
     text-align: start;
     margin-top: 140px;
     color: var(--button-color);
+    animation: containerFadeIn 2s ease;
 }
 
 .hero-left p{
     font-size: 20px;
     margin: 20px 0px;
     margin-bottom: 40px;
+    animation: containerFadeIn 2s ease;
 }
 
 .hero-left div{
@@ -31,11 +33,12 @@
     font-weight: 600;
     transition: 0.5s;
     cursor: pointer;
+    animation: pulse 2s infinite;
 }
 
 .hero-left div:hover{
     background-color: var(--button-hover-color);
-    transform: scale(1.10);
+    animation: none;
 }
 
 .hero-right{
