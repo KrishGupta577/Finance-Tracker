@@ -1,0 +1,116 @@
+.login {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #00000090;
+    display: grid;
+}
+
+.form-section {
+    justify-self: center;
+    align-self: center;
+    width: max(25vw, 330px);
+    color: #808080;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    gap: 20px;
+    animation: containerFadeIn 1s;
+}
+
+.login-cancel{
+    text-align: end;
+    font-size: 20px;
+    color: var(--button-color);
+    cursor: pointer;
+}
+
+.login-heading{
+    text-align: center;
+    animation: slideInLeft 1s;
+}
+
+.login-heading h1{
+    color: var(--button-color);
+    margin-bottom: 10px;
+}
+
+.login-heading p{
+    font-size: 15px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0px;
+    animation: slideInLeft 1s;
+}
+
+.input-group-title label{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.input-group input{
+    outline: none;
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.input-group input:focus{
+    outline: 1px solid var(--border-color);
+}
+
+.input-group-title{
+    display: flex;
+    gap: 5px;
+}
+
+.forgot-password{
+    text-align: end;
+    color: var(--button-color);
+}
+.forgot-password a{
+    color: var(--button-color);
+    animation: slideInLeft 1s;
+}
+
+.btn-login{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-login button{
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--button-color);
+    border: none;
+    cursor: pointer;
+    animation: slideInLeft 1s;
+    transition: all 0.5s;
+}
+
+.btn-login button:hover{
+    background-color: var(--button-hover-color);
+    transform: scale(1.10);
+}
+
+.signup-link{
+    text-align: center;
+    animation: slideInLeft 1s;
+}
+
+.signup-link a{
+    color: var(--button-color);
+    cursor: pointer;
+    text-decoration: underline;
+}

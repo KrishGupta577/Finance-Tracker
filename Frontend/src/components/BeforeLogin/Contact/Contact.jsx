@@ -26,8 +26,8 @@ const Contact = () => {
             <div className='contact-right'>
                 <h3>Give Us a Feedback</h3>
                 <div className='contact-right-feedback'>
-                    <input className='contact-right-feedback-email' type="email" name="" id="" placeholder='Email'/>
-                    <input className='contact-right-feedback-input' type="text" name="" id="" placeholder='Write a review'/>
+                    <input className='contact-right-feedback-email' type="email" name="" placeholder='Email'/>
+                    <input className='contact-right-feedback-input' type="text" name="" placeholder='Write a review'/>
                     <button type='submit'>SEND</button>
                 </div>
             </div>

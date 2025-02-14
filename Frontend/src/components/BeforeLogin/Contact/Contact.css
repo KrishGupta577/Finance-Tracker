@@ -75,6 +75,7 @@
     cursor: pointer;
     font-weight: bold;
     transition: 0.5s;
+    color: white;
 }
 
 .contact-right .contact-right-feedback button:hover{

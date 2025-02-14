@@ -1,4 +1,4 @@
-:root{
+:root {
     --bg-color: rgb(245, 245, 245);
     --text-color: rgb(66, 66, 66);
     --button-color: rgb(76, 175, 80);
@@ -9,16 +9,40 @@
     --border-color: rgb(102, 187, 106);
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     color: var(--text-color);
 }
 
-body{
+body {
     width: 100vw;
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

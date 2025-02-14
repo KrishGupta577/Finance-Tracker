@@ -1,8 +1,9 @@
 import React from 'react'
 import "./Hero.css"
 import { LineChart, Line,XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { Link } from 'react-router-dom';
 
-const Hero = () => {
+const Hero = ({setShowLogin}) => {
 
     const chartData = [
         { month: 'Jan', savings: 1500 },
@@ -17,7 +18,7 @@ const Hero = () => {
             <div className='hero-left'>
                 <h1>Take Control of Your Finances</h1>
                 <p>Track expenses, analyze spending patterns, and achieve your financial goals with our powerful finance management platform.</p>
-                <a>Get Started Free</a>
+                <div onClick={() => setShowLogin(true)} className='navbar-right-getStarted'>Get Started</div>
             </div>
 
             <div className="hero-right">

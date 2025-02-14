@@ -1,16 +1,13 @@
 import React from 'react'
 import "./Navbar.css"
-import {useNavigate} from "react-router-dom"
+import { Link } from 'react-router-dom'
 
-const Navbar = () => {
-
-    const navigate = useNavigate()
-
+const Navbar = ({setShowLogin}) => {
     return (
         <>
             <nav className='navbar'>
                 <div className='navbar-left'>   
-                        <img onClick={() => navigate('/')} src='/logo.png' alt="Logo" />
+                        <img src='/logo.png' alt="Logo" />
                 </div>
                 <div className="navbar-centre">
                     <span className='navbar-centre-platform'>
@@ -24,7 +21,7 @@ const Navbar = () => {
                     </span>
                 </div>
                 <div className='navbar-right'>
-                    <a className='navbar-right-getStarted' href='/LoginPage'>Get Started</a>
+                    <div onClick={() => setShowLogin(true)} className='navbar-right-getStarted'>Get Started</div>
                 </div>
             </nav>
         </>
