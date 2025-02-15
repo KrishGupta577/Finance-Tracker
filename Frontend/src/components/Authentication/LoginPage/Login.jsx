@@ -1,15 +1,117 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import "./Login.css";
 import "./Signup.css"
-import { DollarSign, User, Lock, Shield, ChevronRight, Mail } from 'lucide-react';
+import { User, Lock, Mail } from 'lucide-react';
+import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+// import StoreContext from "../../../context/StoreContext"
+import axios from "axios"
+import {useNavigate} from "react-router-dom"
 
 const Login = ({ setShowLogin }) => {
+
+    // const { url } = useContext(StoreContext)
     const [isLoading, setIsLoading] = useState(false);
     const [currState, setCurrState] = useState('login');
+    const [token, setToken] = useState()
+    const navigate = useNavigate()
+
+    // Separate form handlers for login and signup
+    const loginForm = useForm();
+    const signupForm = useForm();
+
+    const loginValidation = {
+        username: {
+            required: "Username or Email is required",
+            pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address"
+            }
+        },
+        password: {
+            required: "Password is required",
+            minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters"
+            }
+        }
+    };
+
+    const signupValidation = {
+        name: {
+            required: 'Name is required',
+        },
+        email: {
+            required: "Email is required",
+            pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address"
+            }
+        },
+        password: {
+            required: "Password is required",
+            minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters"
+            }
+        },
+        confirmPassword: {
+            required: "Please confirm your password",
+            validate: (val, formValues) => val === formValues.password || "Passwords don't match"
+        },
+        terms: {
+            required: "You must accept the terms and conditions"
+        }
+    };
+
+    const onHandleLoginSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/login',data)
+            if(response.data.success){
+                toast.success("Welcome")
+                setToken(response.data.token)
+            }
+            else{
+                toast.error(response.data.message)
+            }
+        } catch (error) {
+            
+        }
+        setTimeout(() => {
+            navigate('/dashboard')
+            setIsLoading(false)
+            loginForm.reset()
+        }, 1000);
+
+    };
+
+    const onHandleSignupSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/register', data)
+
+            if (response.data.success) {
+                setCurrState('login')
+                toast.success("User Registed.Please login")
+            }
+            else {
+                toast.error(response.data.message)
+            }
+
+            setTimeout(() => {
+                setIsLoading(false)
+                signupForm.reset()
+            }, 1000);
+        }
+        catch (error) {
+            console.log("Error occured: ", error);
+        }
+    };
+
 
     return (
         <>
-            {/* LOGIN PAGE */}
             {currState === 'login' ? (
                 <div className="login">
                     <div className="form-section">
@@ -18,19 +120,22 @@ const Login = ({ setShowLogin }) => {
                             <h1>Welcome to Finance Tracker</h1>
                             <p>Please log in to manage your finances</p>
                         </div>
-                        <form>
+
+                        <form onSubmit={loginForm.handleSubmit(onHandleLoginSubmit)}>
                             <div className="input-group">
                                 <div className='input-group-title'>
                                     <User size={20} color='green' />
                                     <label htmlFor="username">Username or Email</label>
                                 </div>
                                 <input
-                                    type="text"
+                                    type="email"
                                     id="username"
-                                    name="username"
+                                    {...loginForm.register('username', loginValidation.username)}
                                     placeholder="Enter your username or Email"
-                                    required
                                 />
+                                {loginForm.formState.errors.username && (
+                                    <p className="error-message">{loginForm.formState.errors.username.message}</p>
+                                )}
                             </div>
 
                             <div className="input-group">
@@ -41,10 +146,12 @@ const Login = ({ setShowLogin }) => {
                                 <input
                                     type="password"
                                     id="password"
-                                    name="password"
+                                    {...loginForm.register('password', loginValidation.password)}
                                     placeholder="Enter your password"
-                                    required
                                 />
+                                {loginForm.formState.errors.password && (
+                                    <p className="error-message">{loginForm.formState.errors.password.message}</p>
+                                )}
                             </div>
 
                             <div className="forgot-password">
@@ -52,10 +159,10 @@ const Login = ({ setShowLogin }) => {
                             </div>
 
                             <div className="btn-login">
-                                <button type="submit" disabled={isLoading}>
+                                <button type="submit" disabled={isLoading || loginForm.formState.isSubmitting}>
                                     {isLoading ? (
                                         <div className="loading-spinner">
-                                            <DollarSign size={24} />
+                                            <>Please Wait... </>
                                         </div>
                                     ) : (
                                         <>Login to Dashboard</>
@@ -70,15 +177,29 @@ const Login = ({ setShowLogin }) => {
                     </div>
                 </div>
             ) : (
-
-                // SIGNUP PAGE
-
                 <div className="signup-page">
                     <div className="signup-container">
                         <p onClick={() => setShowLogin(false)} className='signup-cancel'>X</p>
                         <div className="signup-form-section">
                             <h2>Create Your Account</h2>
-                            <form>
+                            <form onSubmit={signupForm.handleSubmit(onHandleSignupSubmit)}>
+
+                                <div className="input-group">
+                                    <div className='input-group-title'>
+                                        <User size={20} color='green' />
+                                        <label htmlFor="name">Name</label>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        {...signupForm.register('name', signupValidation.name)}
+                                        placeholder="Enter your full name"
+                                    />
+                                    {signupForm.formState.errors.name && (
+                                        <p className="error-message">{signupForm.formState.errors.name.message}</p>
+                                    )}
+                                </div>
+
                                 <div className="input-group">
                                     <div className='input-group-title'>
                                         <Mail size={20} color='green' />
@@ -87,24 +208,28 @@ const Login = ({ setShowLogin }) => {
                                     <input
                                         type="email"
                                         id="email"
-                                        name="email"
+                                        {...signupForm.register('email', signupValidation.email)}
                                         placeholder="Enter your email"
-                                        required
                                     />
+                                    {signupForm.formState.errors.email && (
+                                        <p className="error-message">{signupForm.formState.errors.email.message}</p>
+                                    )}
                                 </div>
 
                                 <div className="input-group">
                                     <div className='input-group-title'>
                                         <Lock size={20} color='green' />
-                                        <label htmlFor="password">Password</label>
+                                        <label htmlFor="signup-password">Password</label>
                                     </div>
                                     <input
                                         type="password"
-                                        id="password"
-                                        name="password"
+                                        id="signup-password"
+                                        {...signupForm.register('password', signupValidation.password)}
                                         placeholder="Create a strong password"
-                                        required
                                     />
+                                    {signupForm.formState.errors.password && (
+                                        <p className="error-message">{signupForm.formState.errors.password.message}</p>
+                                    )}
                                 </div>
 
                                 <div className="input-group">
@@ -115,34 +240,40 @@ const Login = ({ setShowLogin }) => {
                                     <input
                                         type="password"
                                         id="confirm-password"
-                                        name="confirmPassword"
+                                        {...signupForm.register('confirmPassword', signupValidation.confirmPassword)}
                                         placeholder="Confirm your password"
-                                        required
                                     />
+                                    {signupForm.formState.errors.confirmPassword && (
+                                        <p className="error-message">{signupForm.formState.errors.confirmPassword.message}</p>
+                                    )}
                                 </div>
 
                                 <div className="signup-popup-condition">
-                                    <input type="checkbox" required name="" />
-                                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
+                                    <input
+                                        type="checkbox" id='terms'
+                                        {...signupForm.register('terms', signupValidation.terms)}
+                                    />
+                                    <label htmlFor='terms'>By continuing, I agree to the terms of use & privacy policy.</label>
+                                    {signupForm.formState.errors.terms && (
+                                        <p className="error-message">{signupForm.formState.errors.terms.message}</p>
+                                    )}
                                 </div>
 
                                 <div className='btn-signup'>
-                                    <button type="submit" disabled={isLoading}>
+                                    <button type="submit" disabled={isLoading || signupForm.formState.isSubmitting}>
                                         {isLoading ? (
                                             <div className="loading-spinner">
-                                                <Shield size={24} />
+                                                <>Please wait...</>
                                             </div>
                                         ) : (
-                                            <>
-                                                Create Account
-                                            </>
+                                            <>Create Account</>
                                         )}
                                     </button>
                                 </div>
                             </form>
                         </div>
                         <p className="login-link">
-                            Don't have an account? <a onClick={() => setCurrState('login')}>Login</a>
+                            Already have an account? <a onClick={() => setCurrState('login')}>Login</a>
                         </p>
                     </div>
                 </div>

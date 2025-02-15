@@ -20,55 +20,46 @@ const Features = () => {
             icon: <PieChart color='blue' />,
             title: "Advanced Analytics",
             description: "Visualize your spending patterns with interactive charts and detailed breakdowns of your expenses.",
-            color: "blue"
         },
         {
             icon: <LineChart color='green' />,
             title: "Smart Budgeting",
             description: "Set and track budgets for different categories. Get intelligent suggestions to optimize your spending.",
-            color: "green"
         },
         {
             icon: <Wallet color='purple' />,
             title: "Expense Tracking",
             description: "Effortlessly track your daily expenses and income. Categorize transactions automatically.",
-            color: "purple"
         },
         {
             icon: <Bell color='red' />,
             title: "Smart Alerts",
             description: "Get notifications for bill payments, unusual spending, and when you're approaching budget limits.",
-            color: "red"
         },
         {
             icon: <Target color='orange' />,
             title: "Financial Goals",
             description: "Set savings goals and track your progress. Get personalized recommendations to achieve them faster.",
-            color: "orange"
         },
         {
             icon: <TrendingUp color='teal' />,
             title: "Investment Tracking",
             description: "Monitor your investments and analyze their performance with detailed insights and reports.",
-            color: "teal"
         },
         {
             icon: <Shield color='indigo' />,
             title: "Secure & Private",
             description: "Bank-grade security ensures your financial data is always protected and private.",
-            color: "indigo"
         },
         {
             icon: <Clock color='pink' />,
             title: "Real-time Updates",
             description: "Stay up-to-date with real-time transaction tracking and instant balance updates.",
-            color: "pink"
         },
         {
             icon: <Smartphone className="icon cyan" />,
             title: "Mobile Friendly",
             description: "Access your finances on the go with our responsive mobile design and native apps.",
-            color: "cyan"
         }
     ];
 

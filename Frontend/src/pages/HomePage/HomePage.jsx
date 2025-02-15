@@ -6,6 +6,7 @@ import Hero from '../../components/BeforeLogin/Hero/Hero'
 import Navbar from '../../components/BeforeLogin/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import Login from "../../components/Authentication/LoginPage/Login"
+import { ToastContainer } from 'react-toastify'
 
 const HomePage = () => {
 
@@ -13,6 +14,7 @@ const HomePage = () => {
 
   return (
     <>
+    <ToastContainer/>
       {showLogin ? <Login setShowLogin={setShowLogin}  />: <></>} 
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />
