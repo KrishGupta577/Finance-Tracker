@@ -4,16 +4,16 @@ import "./Signup.css"
 import { User, Lock, Mail } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-// import StoreContext from "../../../context/StoreContext"
 import axios from "axios"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { StoreContext } from '../../../context/StoreContext';
 
 const Login = ({ setShowLogin }) => {
 
-    // const { url } = useContext(StoreContext)
     const [isLoading, setIsLoading] = useState(false);
     const [currState, setCurrState] = useState('login');
-    const [token, setToken] = useState()
+    const { url } = useContext(StoreContext)
+    const {token, setToken} = useContext(StoreContext)
     const navigate = useNavigate()
 
     // Separate form handlers for login and signup
@@ -67,16 +67,18 @@ const Login = ({ setShowLogin }) => {
     const onHandleLoginSubmit = async (data) => {
         setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/user/login',data)
-            if(response.data.success){
+            const response = await axios.post(url+'/api/user/login', data)
+            if (response.data.success) {
                 toast.success("Welcome")
                 setToken(response.data.token)
+
+                localStorage.setItem("token",response.data.token)
             }
-            else{
+            else {
                 toast.error(response.data.message)
             }
         } catch (error) {
-            
+            console.log("Error occured: ", error);
         }
         setTimeout(() => {
             navigate('/dashboard')
@@ -89,7 +91,7 @@ const Login = ({ setShowLogin }) => {
     const onHandleSignupSubmit = async (data) => {
         setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/user/register', data)
+            const response = await axios.post(url+'/api/user/register', data)
 
             if (response.data.success) {
                 setCurrState('login')
