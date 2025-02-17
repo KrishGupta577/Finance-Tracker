@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config()
+
+const dbConnectionString = process.env.DB_CONNECTION_STRING
 
 export const connectDB = async () => {
-    await mongoose.connect('mongodb+srv://krishnagupta2022:krish67890@cluster0.btmah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() => console.log("DB connected")).catch("error")
+    await mongoose.connect(dbConnectionString).then(() => console.log("DB connected")).catch("error")
 }

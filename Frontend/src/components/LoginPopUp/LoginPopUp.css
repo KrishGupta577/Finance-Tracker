@@ -1,0 +1,62 @@
+.login-heading{
+    text-align: center;
+    animation: slideInLeft 1s;
+}
+
+.login-heading h1{
+    color: var(--button-color);
+    margin-bottom: 10px;
+}
+
+.login-heading p{
+    font-size: 15px;
+}
+
+
+
+.btn-login{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-login button{
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--button-color);
+    border: none;
+    cursor: pointer;
+    animation: slideInLeft 1s;
+    transition: all 0.5s;
+}
+
+.btn-login button:hover{
+    background-color: var(--button-hover-color);
+    transform: scale(1.10);
+}
+
+.signup-link{
+    margin: 20px 0px;
+    text-align: center;
+    animation: slideInLeft 1s;
+}
+
+.signup-link a{
+    color: var(--button-color);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+.login-partition{
+    text-align: center;
+    font-size: 18px;
+}

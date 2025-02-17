@@ -5,6 +5,7 @@ import { connectDB } from "./src/config/db.js"
 import userRouter from "./src/routes/userRoutes.js"
 
 dotenv.config()
+
 const app = express()
 const PORT = process.env.PORT
 

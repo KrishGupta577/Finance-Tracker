@@ -1,0 +1,33 @@
+.signup-form-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: var(--button-color);
+    animation: slideInLeft 0.6s ease-out;
+    text-align: center;
+}
+
+.signup-popup-condition{
+    display: flex;
+    gap: 10px;
+    margin: 20px 0px;
+    animation: slideInLeft 1s;
+}
+
+.btn-signup{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+
+
+.login-link{
+    text-align: center;
+    animation: slideInLeft 1s;
+}
+
+.login-link a{
+    color: var(--button-color);
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js";
 import jwt from 'jsonwebtoken'
 import bcrypt from "bcrypt"
 import validator from 'validator'
+import { mailSender } from "../utils/myMailer.js";
 
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET)
@@ -32,10 +33,12 @@ const registerUser = async (req, res) => {
             name: name,
             email: email,
             password: hashedPassword,
+            login_type: "email",
         })
 
         const user = await newUser.save()
 
+        mailSender(email,name)
         res.json({ success: true, message: "User registered." })
     }
     catch (error) {
@@ -48,8 +51,12 @@ const userLogin = async (req, res) => {
     try {
         const { username, password } = req.body
 
-        const user = await userModel.findOne({ email:username })
-        
+        const user = await userModel.findOne({ email: username })
+
+        if(user.login_type === "google"){
+            return res.json({success:false,message:"User is registered using Google"})
+        }
+
         if (!user) {
             return res.json({ success: false, message: "User Doesn't exists." })
         }
@@ -68,4 +75,40 @@ const userLogin = async (req, res) => {
     }
 }
 
-export { registerUser, userLogin }
+const userGoogleLogin = async (req, res) => {
+    try {
+        const { email, name, sub, picture } = req.body
+
+        const exists = await userModel.findOne({ email })
+
+        if (exists) {
+            if(exists.login_type === "email"){
+                return res.json({success:false,message:"User is registered using Email"})
+            }    
+            const token = createToken(exists._id)
+            return res.json({ success: true, message: "Welcome Back",token })
+        }
+
+        const newUser = new userModel({
+            name: name,
+            email: email,
+            google_id: sub,
+            login_type: "google",
+            profile_picture_url: picture,
+        })
+
+        const user = await newUser.save()
+
+        const token = createToken(user._id)
+
+        mailSender(email,name)
+        res.json({ success: true, message: "User registered.", token })
+
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error" })
+    }
+}
+
+export { registerUser, userLogin, userGoogleLogin }
