@@ -1,0 +1,182 @@
+.mobile-app-container {
+    width: 100%;
+    padding: 20px 0;
+    background-color: transparent;
+    color: #333;
+    box-shadow: none;
+}
+
+/* Header styling to match dashboard */
+.mobile-app-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.mobile-app-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    color: #2c3e50;
+}
+
+.mobile-app-header p {
+    font-size: 16px;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Features section to match the dashboard cards */
+.mobile-app-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.feature-card-container{
+    transition: all 0.5s;
+}
+
+.feature-card-container:hover{
+    transform: scale(1.05);
+    /* transform: translateY(-3px); */
+}
+
+.feature-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    width: 320px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+    background-color: #f7f9fa;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    color: #4caf50;
+    /* Matching the green in your dashboard */
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.feature-card p {
+    color: #6c757d;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* Download section aligned with dashboard style */
+.download-section {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.download-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.download-button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.download-button.ios {
+    background-color: #000;
+}
+
+.download-button.android {
+    background-color: #4caf50;
+    /* Matching the green in your dashboard */
+}
+
+.button-text {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-text span {
+    font-size: 11px;
+    margin-bottom: 1px;
+}
+
+.button-text strong {
+    font-size: 14px;
+}
+
+.mobile-preview {
+    display: none;
+}
+
+/* Responsive design adjustments for dashboard */
+@media (max-width: 1024px) {
+    .mobile-app-features {
+        gap: 20px;
+    }
+
+    .feature-card {
+        width: calc(50% - 20px);
+        min-width: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-app-header h1 {
+        font-size: 24px;
+    }
+
+    .mobile-app-header p {
+        font-size: 14px;
+    }
+
+    .mobile-app-features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .download-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+/* Sidebar integration styling */
+.mobile-app-sidebar-active {
+    background-color: #4caf50;
+    color: white;
+}

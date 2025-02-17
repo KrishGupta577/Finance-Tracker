@@ -1,0 +1,121 @@
+.transactions-container {
+    padding: 1.5rem;
+  }
+  
+  .transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .transactions-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+  
+  .add-transaction-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--button-color);
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-transaction-button:hover {
+    background-color: var(--button-hover-color);
+  }
+  
+  .transactions-table-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .transactions-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .transactions-table {
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .transactions-table-header {
+    background-color: #f9fafb;
+  }
+  
+  .table-header-cell {
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .transactions-table-body {
+    background-color: white;
+  }
+  
+  .transaction-row {
+    transition: background-color 0.3s;
+  }
+  
+  .transaction-row:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .table-cell {
+    padding: 1rem 1.5rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
+  }
+  
+  .date-cell {
+    color: #6b7280;
+  }
+  
+  .description-cell {
+    font-weight: 500;
+    color: #111827;
+  }
+  
+  .category-cell {
+    color: #6b7280;
+  }
+  
+  .amount-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .income-icon,
+  .expense-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+  }
+  
+  .income-icon {
+    color: #10b981;
+  }
+  
+  .expense-icon {
+    color: #ef4444;
+  }
+  
+  .income-amount {
+    color: #10b981;
+  }
+  
+  .expense-amount {
+    color: #ef4444;
+  }
