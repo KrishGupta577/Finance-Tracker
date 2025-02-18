@@ -1,6 +1,5 @@
 .login-heading{
     text-align: center;
-    animation: slideInLeft 1s;
 }
 
 .login-heading h1{
@@ -28,7 +27,6 @@
     background-color: var(--button-color);
     border: none;
     cursor: pointer;
-    animation: slideInLeft 1s;
     transition: all 0.5s;
 }
 
@@ -40,7 +38,6 @@
 .signup-link{
     margin: 20px 0px;
     text-align: center;
-    animation: slideInLeft 1s;
 }
 
 .signup-link a{

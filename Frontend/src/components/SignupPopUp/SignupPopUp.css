@@ -2,7 +2,6 @@
     font-size: 32px;
     margin-bottom: 15px;
     color: var(--button-color);
-    animation: slideInLeft 0.6s ease-out;
     text-align: center;
 }
 
@@ -10,7 +9,6 @@
     display: flex;
     gap: 10px;
     margin: 20px 0px;
-    animation: slideInLeft 1s;
 }
 
 .btn-signup{
@@ -19,11 +17,26 @@
     margin: 10px;
 }
 
+.btn-signup button{
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--button-color);
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.btn-signup button:hover{
+    background-color: var(--button-hover-color);
+    transform: scale(1.10);
+}
+
 
 
 .login-link{
     text-align: center;
-    animation: slideInLeft 1s;
 }
 
 .login-link a{

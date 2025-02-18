@@ -18,17 +18,14 @@ const userSchema = new mongoose.Schema({
         required: function() {
           return this.login_type === 'google'; // Google ID is required if login_type is "google"
         },
-        unique: true, // Google ID should be unique
       },
       name: {
         type: String,
         required: true
       },
       profile_picture_url: {
-        type: String,
-        required: function() {
-          return this.login_type === 'google'; // Profile picture URL is required if login_type is "google"
-        },
+        type: String, 
+        default:"/profile_photo.png"
       },
       login_type: {
         type: String,
@@ -38,7 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     {
       timestamps: true, // Automatically adds 'createdAt' and 'updatedAt' fields
-    }, { minimize: false })
+    })
 
 
 const userModel = mongoose.models.user || mongoose.model("user",userSchema)

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import './Transaction.css';
+import { useState } from 'react';
+import AddTransaction from '../EditTransactionPopUp/addTransaction';
 
 const transactions = [
   { id: 1, type: 'expense', description: 'Grocery Shopping', amount: -120.50, date: '2024-03-10', category: 'Food' },
@@ -11,6 +13,8 @@ const transactions = [
 ];
 
 function Transaction() {
+  const [showAddTran, setShowAddTran] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -18,9 +22,10 @@ function Transaction() {
       exit={{ opacity: 0, y: 20 }}
       className="transactions-container"
     >
+      {showAddTran && <AddTransaction setShowAddTran={setShowAddTran}/>}
       <div className="transactions-header">
         <h1 className="transactions-title">Transactions</h1>
-        <button className="add-transaction-button">
+        <button className="add-transaction-button" onClick={() => setShowAddTran(true)}>
           Add Transaction
         </button>
       </div>

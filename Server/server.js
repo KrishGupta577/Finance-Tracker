@@ -3,6 +3,8 @@ import cors from 'cors'
 import dotenv from "dotenv"
 import { connectDB } from "./src/config/db.js"
 import userRouter from "./src/routes/userRoutes.js"
+import infoRoute from "./src/routes/InfoRoute.js"
+import transactionRoute from "./src/routes/transactionRoute.js"
 
 dotenv.config()
 
@@ -15,6 +17,8 @@ app.use(cors())
 connectDB()
 
 app.use("/api/user",userRouter)
+app.use("/api/user",infoRoute)
+app.use("/api/transaction",transactionRoute)
 
 app.get('/',(req,res) => {
     res.send("Welcome to the Finance Tracker")

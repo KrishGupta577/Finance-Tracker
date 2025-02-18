@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     Home,
     ArrowRightLeft,
@@ -10,7 +10,7 @@ import {
     LogOut,
     BellIcon,
 } from 'lucide-react';
-import './Dashboard.css'; 
+import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Overview from '../../components/AfterLogin/Overview/Overview';
 import Transaction from '../../components/AfterLogin/Transaction/Transaction';
@@ -18,10 +18,15 @@ import Insights from '../../components/AfterLogin/Insights/Insights';
 import Reports from '../../components/AfterLogin/Reports/Reports';
 import Setting from '../../components/AfterLogin/SettingPage/Setting';
 import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
+import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
+import axios from "axios"
+import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
+
     const [selectedMenu, setSelectedMenu] = useState('Overview');
-  const navigate = useNavigate()
+    const { url, token} = useContext(StoreContext)
+    const navigate = useNavigate()
     const sidebarMenus = [
         { name: 'Overview', icon: <Home className={"menu-icon"} /> },
         { name: 'Transactions', icon: <ArrowRightLeft className={"menu-icon"} /> },
@@ -33,11 +38,26 @@ const Dashboard = () => {
         { name: 'Logout', icon: <LogOut className={"menu-icon"} /> }
     ];
 
-
-
     const handleMenuClick = (name) => {
         setSelectedMenu(name);
     };
+
+    const userInfoFunction = async () => {
+        try {
+            const response = await axios.get(url + "/api/user/info", { headers: { token } })
+            if (response.data.userInfo) {
+                sessionStorage.setItem("profile_photo", response.data.userInfo.profile_picture_url)
+                sessionStorage.setItem("name", response.data.userInfo.name)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if (token)
+            userInfoFunction()
+    }, [token])
 
     return (
         <div className="app-container">
@@ -75,12 +95,12 @@ const Dashboard = () => {
                         </button>
                         <div className="profile-info">
                             <img
-                                src="https://public.readdy.ai/ai/img_res/ab01949d95a26d0527301b340a8d5b0f.jpg"
+                                src={sessionStorage.getItem("profile_photo")}
                                 alt="Profile"
                                 className="profile-image"
                             />
                             <div>
-                                <h3 className="profile-name">Alexander Mitchell</h3>
+                                <h3 className="profile-name">{sessionStorage.getItem("name")}</h3>
                             </div>
                         </div>
                     </div>
@@ -94,6 +114,8 @@ const Dashboard = () => {
                 {selectedMenu === 'Reports' && <Reports />}
                 {selectedMenu === 'Settings' && <Setting />}
                 {selectedMenu === 'Mobile App' && <MobileApp />}
+                {selectedMenu === 'Logout' && <LogoutPage />}
+
 
             </div>
         </div>

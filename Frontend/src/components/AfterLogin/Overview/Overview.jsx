@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from "react";
 import "./Overview.css"
 import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
@@ -25,41 +26,34 @@ const Overview = () => {
                 <div className="quick-stats">
                     <div className="stat-card">
                         <div className="stat-header">
-                            <h3>Total Balance</h3>
-                            <i className="fa-solid fa-wallet"></i>
+                            <h3>Monthly Income</h3>
                         </div>
                         <p className="stat-value">$24,850.75</p>
                         <p className="stat-change positive">
-                            <i className="fa-solid fa-arrow-up"></i>
                             +2.5% from last month
                         </p>
                     </div>
                     <div className="stat-card">
                         <div className="stat-header">
-                            <h3>Monthly Income</h3>
-                            <i className="fa-solid fa-arrow-trend-up"></i>
+                            <h3>Expense</h3>
                         </div>
                         <p className="stat-value">$5,240.00</p>
                         <p className="stat-change positive">
-                            <i className="fa-solid fa-arrow-up"></i>
                             +4.3% from last month
                         </p>
                     </div>
                     <div className="stat-card">
                         <div className="stat-header">
-                            <h3>Monthly Expenses</h3>
-                            <i className="fa-solid fa-arrow-trend-down"></i>
+                            <h3>Saving</h3>
                         </div>
                         <p className="stat-value">$3,850.25</p>
                         <p className="stat-change negative">
-                            <i className="fa-solid fa-arrow-down"></i>
                             -1.8% from last month
                         </p>
                     </div>
                     <div className="stat-card">
                         <div className="stat-header">
-                            <h3>Savings Goal</h3>
-                            <i className="fa-solid fa-piggy-bank"></i>
+                            <h3>This Month's Goal</h3>
                         </div>
                         <p className="stat-value">75%</p>
                         <div className="progress-bar">
@@ -85,7 +79,7 @@ const Overview = () => {
                         <h3 className="chart-title">Savings Distribution</h3>
                         <ResponsiveContainer width="100%" height={300}>
                             <PieChart>
-                                <Tooltip/>
+                                <Tooltip />
                                 <Pie data={data} dataKey="value" innerRadius="40%" outerRadius="70%">
                                     {data.map((entry, index) => (
                                         <Cell key={index} fill={colors[index % colors.length]} />
@@ -129,7 +123,7 @@ const Overview = () => {
                                 <XAxis dataKey="category" />
                                 <YAxis />
                                 <Tooltip />
-                                <Bar dataKey="value" />
+                                <Bar dataKey="value" fill="#4CAF50"/>
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

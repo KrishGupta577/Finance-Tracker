@@ -1,0 +1,164 @@
+.add-transaction-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: popupAnimation 0.3s ease forwards;
+}
+
+.add-transaction-popup {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease forwards;
+  padding-right: 20px;
+}
+
+/* Header styles */
+.add-transaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.add-transaction-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.close-button:active {
+  transform: scale(0.9);
+}
+
+/* Form styles */
+.add-transaction-popup form {
+  padding: 20px;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: 20px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.input-container {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+/* Radio group styles */
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+
+.radio-option input {
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.radio-option label {
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.radio-option:has(input[value="expense"]:checked) label {
+  color: #f44336;
+}
+
+.radio-option:has(input[value="income"]:checked) label {
+  color: #4CAF50;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.submit-button {
+  background-color: var(--button-color);
+  color: white;
+}
+
+.submit-button:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+  background-color: var(--button-hover-color);
+}

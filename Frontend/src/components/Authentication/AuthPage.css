@@ -34,7 +34,6 @@
     flex-direction: column;
     gap: 10px;
     margin: 15px 0px;
-    animation: slideInLeft 1s;
 }
 
 .input-group-title label{
@@ -64,7 +63,6 @@
 }
 .forgot-password a{
     color: var(--button-color);
-    animation: slideInLeft 1s;
 }
 
 .google-link{

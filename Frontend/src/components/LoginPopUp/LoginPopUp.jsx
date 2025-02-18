@@ -118,7 +118,7 @@ const LoginPopUp = ({ setCurrState }) => {
                     <button type="submit" disabled={isLoading || loginForm.formState.isSubmitting}>
                         {isLoading ? (
                             <div className="loading-spinner">
-                                <>Please Wait... </>
+                                
                             </div>
                         ) : (
                             <>Login to Dashboard</>
