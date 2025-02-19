@@ -2,14 +2,17 @@ import { IndianRupee, MessageSquare, Tag, X } from "lucide-react"
 import "./addTransaction.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form"
-
+import { StoreContext } from "../../../context/StoreContext"
 
 const Transaction = ({ setShowAddTran }) => {
 
     const [isLoading, setIsLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { url, token } = useContext(StoreContext)
+    const { register, watch, handleSubmit, formState: { errors } } = useForm();
+
+    const selectedCategory = watch("category");
 
     const addTransactionValidation = {
         amount: {
@@ -18,15 +21,34 @@ const Transaction = ({ setShowAddTran }) => {
         category: {
             required: "Category is Required",
         },
-        comment: {
-
+        comment: {},
+        expenseType: {
+            required: "Expense Category is required"
         },
     }
+
+    const expenseCategories = [
+        "Entertainment",
+        "Food",
+        "Transportation",
+        "Shopping",
+        "Bills",
+        "Healthcare",
+        "Education",
+        "Other"
+    ];
 
     const onHandleError = (error) => { console.log(error) }
 
     const onHandleSubmit = async (data) => {
-        console.log(data)
+        setIsLoading(false)
+        console.log(token)
+        try {
+            const response = await axios.post(url + "/api/transaction/add", data, { headers: {token} })
+            console.log(response)
+        } catch (error) {
+
+        }
     }
 
     return (
@@ -54,7 +76,7 @@ const Transaction = ({ setShowAddTran }) => {
                                 name="amount" {...register("amount", addTransactionValidation.amount)}
                                 placeholder="Enter amount"
                                 required
-                                step="0.01"
+                                step="1"
                                 className="form-input"
                             />
                         </div>
@@ -93,6 +115,28 @@ const Transaction = ({ setShowAddTran }) => {
                         </div>
                     </div>
 
+                    {selectedCategory === "expense" && (
+                        <div className="form-group">
+                            <div className="input-icon">
+                                <Tag size={20} />
+                            </div>
+                            <div className="input-container">
+                                <label>Expense Category</label>
+                                <select
+                                    className="form-select"
+                                    {...register("expenseType", addTransactionValidation.expenseType)}
+                                >
+                                    <option value="">Select category</option>
+                                    {expenseCategories.map((category) => (
+                                        <option key={category} value={category.toLowerCase()}>
+                                            {category}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>)}
+
+
                     <div className="form-group">
                         <div className="input-icon">
                             <MessageSquare size={20} color="purple" />
@@ -118,7 +162,7 @@ const Transaction = ({ setShowAddTran }) => {
                             {isLoading ? (
                                 <div className="loading-spinner" />
                             ) : (
-                                ' Transaction'
+                                'Add Transaction'
                             )}
                         </button>
                     </div>

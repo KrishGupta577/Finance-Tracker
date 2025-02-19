@@ -25,7 +25,7 @@ import { StoreContext } from '../../context/StoreContext';
 const Dashboard = () => {
 
     const [selectedMenu, setSelectedMenu] = useState('Overview');
-    const { url, token} = useContext(StoreContext)
+    const {userInfo} = useContext(StoreContext)
     const navigate = useNavigate()
     const sidebarMenus = [
         { name: 'Overview', icon: <Home className={"menu-icon"} /> },
@@ -41,23 +41,6 @@ const Dashboard = () => {
     const handleMenuClick = (name) => {
         setSelectedMenu(name);
     };
-
-    const userInfoFunction = async () => {
-        try {
-            const response = await axios.get(url + "/api/user/info", { headers: { token } })
-            if (response.data.userInfo) {
-                sessionStorage.setItem("profile_photo", response.data.userInfo.profile_picture_url)
-                sessionStorage.setItem("name", response.data.userInfo.name)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        if (token)
-            userInfoFunction()
-    }, [token])
 
     return (
         <div className="app-container">
@@ -95,12 +78,12 @@ const Dashboard = () => {
                         </button>
                         <div className="profile-info">
                             <img
-                                src={sessionStorage.getItem("profile_photo")}
+                                src={userInfo.profile_picture_url}
                                 alt="Profile"
                                 className="profile-image"
                             />
                             <div>
-                                <h3 className="profile-name">{sessionStorage.getItem("name")}</h3>
+                                <h3 className="profile-name">{userInfo.name}</h3>
                             </div>
                         </div>
                     </div>

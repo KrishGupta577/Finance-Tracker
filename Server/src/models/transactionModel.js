@@ -17,7 +17,13 @@ const transactionSchema = new mongoose.Schema({
     },
     comment: {
         type: String,
-        required: false,
+        default: ""
+    },
+    expense_category:{
+        type:String,
+        required:function(){
+            return this.category === "expense"
+        }
     },
 }, { timestamps: true })
 

@@ -9,7 +9,6 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  animation: popupAnimation 0.3s ease forwards;
 }
 
 .add-transaction-popup {
@@ -21,6 +20,7 @@
   overflow: hidden;
   animation: slideUp 0.3s ease forwards;
   padding-right: 20px;
+  animation: popupAnimation 0.3s ease forwards;
 }
 
 /* Header styles */
@@ -36,7 +36,6 @@
   margin: 0;
   font-size: 1.4rem;
   color: #333;
-  animation: fadeIn 0.4s ease forwards;
 }
 
 .close-button {
@@ -66,7 +65,6 @@
 .form-group {
   display: flex;
   margin-bottom: 20px;
-  animation: fadeIn 0.4s ease forwards;
 }
 
 .input-icon {
@@ -139,7 +137,6 @@ label {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 30px;
-  animation: fadeIn 0.5s ease forwards;
 }
 
 .submit-button {
