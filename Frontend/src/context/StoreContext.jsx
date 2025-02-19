@@ -13,7 +13,11 @@ const StoreContextProvider = (props) => {
     const transactionList = async (token) => {
         try {
             const response = await axios.get(url + "/api/transaction/get", { headers: { token } })
-            setTransactions(response)
+            console.log(response)
+            if (response.data.success) {
+                setTransactions(response.data.transactions)
+            }
+
         } catch (error) {
             console.log(error)
         }
@@ -31,19 +35,27 @@ const StoreContextProvider = (props) => {
     }
 
     useEffect(() => {
-        setToken(localStorage.getItem("token"))
-        if (localStorage.getItem("token")) {
-            transactionList(localStorage.getItem("token"))
-            userInfoFunction(localStorage.getItem("token"))
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setToken(storedToken);
         }
-    },[])
+      }, []);
     
+      useEffect(() => {
+        if (token) {
+          transactionList(token);
+          userInfoFunction(token);
+        }
+      }, [token]);
+
     const contextValue = {
         url,
         token,
         setToken,
         transactions,
-        userInfo
+        userInfo,
+        refreshTransactions: () => transactionList(token), // Add refresh function
+        refreshUserInfo: () => userInfoFunction(token)     // Add refresh function
     }
 
     return (

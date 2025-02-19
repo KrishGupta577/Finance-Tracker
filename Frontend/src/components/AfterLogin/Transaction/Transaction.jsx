@@ -1,24 +1,46 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowDownRight, Edit, Trash2 } from 'lucide-react';
 import './Transaction.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import AddTransaction from '../EditTransactionPopUp/addTransaction';
 import { StoreContext } from "../../../context/StoreContext"
 import axios from 'axios';
-
-// const transactions = [
-//   { id: 1, type: 'expense', description: 'Grocery Shopping', amount: -120.50, date: '2024-03-10', category: 'Food' },
-//   { id: 2, type: 'income', description: 'Salary Deposit', amount: 3000.00, date: '2024-03-09', category: 'Salary' },
-//   { id: 3, type: 'expense', description: 'Netflix Subscription', amount: -15.99, date: '2024-03-08', category: 'Entertainment' },
-//   { id: 4, type: 'expense', description: 'Electric Bill', amount: -85.00, date: '2024-03-07', category: 'Utilities' },
-//   { id: 5, type: 'income', description: 'Freelance Payment', amount: 500.00, date: '2024-03-06', category: 'Freelance' },
-// ];
+import { toast } from 'react-toastify';
 
 function Transaction() {
 
-  
-  const {transactions } = useContext(StoreContext)
+  const { url, token, transactions, refreshTransactions } = useContext(StoreContext)
   const [showAddTran, setShowAddTran] = useState(false);
+
+  const handleTransactionDelete = async (id) => {
+    try {
+      const response = await axios.post(url + "/api/transaction/delete", { id }, { headers: { token } })
+      if (response.data.success) {
+        toast.success(response.data.message)
+        refreshTransactions()
+      }
+      else {
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleTransactionEdit = async (id) => {
+    try {
+      const response = await axios.post(url + "/api/transaction/edit", { id }, { headers: { token } })
+      if (response.data.success) {
+        toast.success(response.data.message)
+        refreshTransactions()
+      }
+      else {
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <motion.div
@@ -42,36 +64,40 @@ function Transaction() {
                 <th className="table-header-cell">Date</th>
                 <th className="table-header-cell">Description</th>
                 <th className="table-header-cell">Category</th>
+                <th className="table-header-cell">Expense Category</th>
                 <th className="table-header-cell">Amount</th>
                 <th className="table-header-cell">Buttons</th>
               </tr>
             </thead>
             <tbody className="transactions-table-body">
-              {transactions.map((transaction) => (
+              {transactions.map((transaction, index) => (
                 <motion.tr
-                  key={transaction.id}
+                  key={index}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   whileHover={{ backgroundColor: '#F9FAFB' }}
                   className="transaction-row"
                 >
                   <td className="table-cell date-cell">
-                    {transaction.date}
+                    {transaction.createdAt.substring(0, 10)}
                   </td>
                   <td className="table-cell description-cell">
-                    {transaction.description}
+                    {transaction.comment}
                   </td>
                   <td className="table-cell category-cell">
                     {transaction.category}
                   </td>
+                  <td className="table-cell category-cell">
+                    {transaction.expense_category}
+                  </td>
                   <td className="table-cell amount-cell">
                     <div className="amount-container">
-                      {transaction.type === 'income' ? (
+                      {transaction.category === 'income' ? (
                         <ArrowUpRight className="income-icon" />
                       ) : (
                         <ArrowDownRight className="expense-icon" />
                       )}
-                      <span className={transaction.type === 'income' ? 'income-amount' : 'expense-amount'}>
+                      <span className={transaction.category === 'income' ? 'income-amount' : 'expense-amount'}>
                         ${Math.abs(transaction.amount).toFixed(2)}
                       </span>
                     </div>
@@ -79,19 +105,17 @@ function Transaction() {
                   <td className="table-cell action-cell">
                     <div
                       className="action-buttons"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
                     >
                       <button
                         className="edit-button"
-                        // onClick={}
+                        onClick={() => { handleTransactionEdit(transaction._id) }}
                         title="Edit transaction"
                       >
                         <Edit size={16} />
                       </button>
                       <button
                         className="delete-button"
-                        // onClick={() => handleDelete(transaction.id)}
+                        onClick={() => handleTransactionDelete(transaction._id)}
                         title="Delete transaction"
                       >
                         <Trash2 size={16} />

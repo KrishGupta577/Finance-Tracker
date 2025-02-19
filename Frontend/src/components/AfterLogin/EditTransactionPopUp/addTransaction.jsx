@@ -9,7 +9,7 @@ import { StoreContext } from "../../../context/StoreContext"
 const Transaction = ({ setShowAddTran }) => {
 
     const [isLoading, setIsLoading] = useState(false);
-    const { url, token } = useContext(StoreContext)
+    const { url, token,refreshTransactions } = useContext(StoreContext)
     const { register, watch, handleSubmit, formState: { errors } } = useForm();
 
     const selectedCategory = watch("category");
@@ -41,13 +41,21 @@ const Transaction = ({ setShowAddTran }) => {
     const onHandleError = (error) => { console.log(error) }
 
     const onHandleSubmit = async (data) => {
-        setIsLoading(false)
+        setIsLoading(true)
         console.log(token)
         try {
-            const response = await axios.post(url + "/api/transaction/add", data, { headers: {token} })
-            console.log(response)
+            const response = await axios.post(url + "/api/transaction/add", data, { headers: { token } })
+            if (response.data.success) {
+                toast.success(response.data.message)
+                refreshTransactions()
+            }
+            else {
+                toast.error(response.data.message)
+            }
         } catch (error) {
-
+            console.log(error)
+        } finally {
+            setShowAddTran(false)
         }
     }
 

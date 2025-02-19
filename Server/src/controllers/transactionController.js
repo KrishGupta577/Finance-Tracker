@@ -33,7 +33,44 @@ const addTransaction = async (req, res) => {
 }
 
 const getTransactions = async (req, res) => {
+    try {
+        const { userId } = req.body
 
+        const transactions = await transactionModel.find({ userId })
+
+        if (transactions) {
+            res.json({ success: true, transactions })
+        }
+
+    } catch (error) {
+
+    }
 }
 
-export { addTransaction, getTransactions }
+const deleteTransaction = async (req, res) => {
+    try {
+        const { id } = req.body
+
+        const transaction = await transactionModel.findByIdAndDelete({ _id: id })
+
+        if (transaction) {
+            res.json({ success: true, message: "Transaction successfully Deleted." })
+        }
+        else {
+            res.json({ success: false, message: "Transaction deletion failed." })
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: "Error" })
+    }
+}
+
+const editTransaction = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+export { addTransaction, getTransactions, deleteTransaction, editTransaction }

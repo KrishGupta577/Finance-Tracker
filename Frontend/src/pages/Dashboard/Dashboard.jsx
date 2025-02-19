@@ -11,7 +11,6 @@ import {
     BellIcon,
 } from 'lucide-react';
 import './Dashboard.css';
-import { useNavigate } from 'react-router-dom';
 import Overview from '../../components/AfterLogin/Overview/Overview';
 import Transaction from '../../components/AfterLogin/Transaction/Transaction';
 import Insights from '../../components/AfterLogin/Insights/Insights';
@@ -19,14 +18,14 @@ import Reports from '../../components/AfterLogin/Reports/Reports';
 import Setting from '../../components/AfterLogin/SettingPage/Setting';
 import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
 import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
-import axios from "axios"
 import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
 
-    const [selectedMenu, setSelectedMenu] = useState('Overview');
+    const [selectedMenu, setSelectedMenu] = useState(() => {
+        return localStorage.getItem('selectedMenu') || 'Overview';
+    });
     const {userInfo} = useContext(StoreContext)
-    const navigate = useNavigate()
     const sidebarMenus = [
         { name: 'Overview', icon: <Home className={"menu-icon"} /> },
         { name: 'Transactions', icon: <ArrowRightLeft className={"menu-icon"} /> },
@@ -40,7 +39,12 @@ const Dashboard = () => {
 
     const handleMenuClick = (name) => {
         setSelectedMenu(name);
+        localStorage.setItem('selectedMenu', name);
     };
+
+    useEffect(() => {
+        document.title = `Finance Tracker - ${selectedMenu}`;
+    }, [selectedMenu]);
 
     return (
         <div className="app-container">

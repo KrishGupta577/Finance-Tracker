@@ -5,8 +5,13 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute';
 import { ToastContainer } from 'react-toastify'
 import Overview from './components/AfterLogin/Overview/Overview';
+import { useContext } from 'react';
+import { StoreContext } from './context/StoreContext';
 
 function App() {
+
+  const {url} = useContext(StoreContext)
+
   return (
     <>
       <ToastContainer />
