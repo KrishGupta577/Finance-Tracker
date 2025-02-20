@@ -21,9 +21,7 @@ const transactionSchema = new mongoose.Schema({
     },
     expense_category:{
         type:String,
-        required:function(){
-            return this.category === "expense"
-        }
+        required:true
     },
 }, { timestamps: true })
 

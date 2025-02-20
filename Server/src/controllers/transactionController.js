@@ -3,7 +3,6 @@ import transactionModel from "../models/transactionModel.js"
 const addTransaction = async (req, res) => {
     try {
         const { userId, amount, category, expenseType, comment } = req.body
-        console.log(req.body)
 
         const newTransaction = new transactionModel()
 
@@ -65,11 +64,52 @@ const deleteTransaction = async (req, res) => {
     }
 }
 
-const editTransaction = async (req,res) => {
+const editTransaction = async (req, res) => {
     try {
-        
+        const { id, data, userId } = req.body
+        const { amount, category, expenseType, comment } = data
+        console.log(req.body)
+
+        if (category === 'income') {
+            const transaction = await transactionModel.findByIdAndUpdate(
+                { _id: id },
+                {
+                    userId,
+                    amount: amount,
+                    category: category,
+                    expense_category: "",
+                    comment: comment,
+                })
+            if (transaction) {
+                res.json({ success: true, message: "Transaction Updated." })
+            }
+            else {
+                res.json({ success: false, message: "Transaction Updation Failed" })
+            }
+        }
+        else {
+            const transaction = await transactionModel.findByIdAndUpdate(
+                { _id: id },
+                {
+                    userId,
+                    amount: amount,
+                    category: category,
+                    expense_category: expenseType,
+                    comment: comment,
+                })
+            if (transaction) {
+                res.json({ success: true, message: "Transaction Updated." })
+            }
+            else {
+                res.json({ success: false, message: "Transaction Updation Failed" })
+            }
+        }
+
+
+
     } catch (error) {
-        
+        console.log(error)
+        res.json({ success: false, message: "Error" })
     }
 }
 

@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowDownRight, Edit, Trash2 } from 'lucide-react';
 import './Transaction.css';
 import { useContext, useState } from 'react';
 import AddTransaction from '../EditTransactionPopUp/addTransaction';
+import EditTransaction from '../EditTransactionPopUp/EditTransaction';
 import { StoreContext } from "../../../context/StoreContext"
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -11,6 +12,8 @@ function Transaction() {
 
   const { url, token, transactions, refreshTransactions } = useContext(StoreContext)
   const [showAddTran, setShowAddTran] = useState(false);
+  const [showEditTran, setShowEditTran] = useState(false)
+  const [editTransactionId, setEditTransactionId] = useState(null);
 
   const handleTransactionDelete = async (id) => {
     try {
@@ -42,6 +45,10 @@ function Transaction() {
     }
   }
 
+  const handleEditTransaction = async (id) => {
+
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -50,6 +57,7 @@ function Transaction() {
       className="transactions-container"
     >
       {showAddTran && <AddTransaction setShowAddTran={setShowAddTran} />}
+
       <div className="transactions-header">
         <h1 className="transactions-title">Transactions</h1>
         <button className="add-transaction-button" onClick={() => setShowAddTran(true)}>
@@ -108,11 +116,12 @@ function Transaction() {
                     >
                       <button
                         className="edit-button"
-                        onClick={() => { handleTransactionEdit(transaction._id) }}
+                        onClick={() => setEditTransactionId(transaction._id)}
                         title="Edit transaction"
                       >
                         <Edit size={16} />
                       </button>
+                      {showEditTran && <EditTransaction setShowEditTran={setShowEditTran} id={transaction._id} />}
                       <button
                         className="delete-button"
                         onClick={() => handleTransactionDelete(transaction._id)}
@@ -128,6 +137,12 @@ function Transaction() {
           </table>
         </div>
       </div>
+      {editTransactionId && (
+        <EditTransaction
+          setShowEditTran={() => setEditTransactionId(null)}
+          id={editTransactionId}
+        />
+      )}
     </motion.div>
   );
 }
