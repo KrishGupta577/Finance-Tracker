@@ -10,6 +10,25 @@ const StoreContextProvider = (props) => {
     const [userInfo, setUserInfo] = useState({})
     const url = 'http://localhost:5000'
 
+    const data = []
+
+    for (let i = 0; i < transactions.length; i++) {
+        if (transactions[i].category === 'expense') {
+            data.push({ name: transactions[i].expense_category, value: transactions[i].amount })
+        }
+    }
+
+    const expenseCategories = [
+        "Entertainment",
+        "Food",
+        "Transportation",
+        "Shopping",
+        "Bills",
+        "Healthcare",
+        "Education",
+        "Other"
+    ];
+
     const transactionList = async (token) => {
         try {
             const response = await axios.get(url + "/api/transaction/get", { headers: { token } })
@@ -54,8 +73,10 @@ const StoreContextProvider = (props) => {
         setToken,
         transactions,
         userInfo,
-        refreshTransactions: () => transactionList(token), // Add refresh function
-        refreshUserInfo: () => userInfoFunction(token)     // Add refresh function
+        expenseCategories,
+        data,
+        refreshTransactions: () => transactionList(token), 
+        refreshUserInfo: () => userInfoFunction(token)  
     }
 
     return (

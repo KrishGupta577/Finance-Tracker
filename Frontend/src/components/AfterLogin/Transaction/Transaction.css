@@ -9,6 +9,51 @@
   margin-bottom: 1.5rem;
 }
 
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sort-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.sort-select {
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 14px;
+  color: #111827;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.sort-select:hover {
+  border-color: #9ca3af;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: var(--button-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.sort-select option {
+  padding: 8px;
+  font-size: 14px;
+}
+
 .transactions-title {
   font-size: 1.5rem;
   font-weight: 700;

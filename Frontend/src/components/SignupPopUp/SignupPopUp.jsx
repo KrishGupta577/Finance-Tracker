@@ -6,12 +6,14 @@ import axios from "axios"
 import { StoreContext } from '../../context/StoreContext';
 import { useContext, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPopUp = ({setCurrState}) => {
 
     const { url } = useContext(StoreContext)
     const [isLoading, setIsLoading] = useState(false);
     const signupForm = useForm();
+    const navigate = useNavigate()
 
     const signupValidation = {
         name: {
@@ -46,8 +48,10 @@ const SignupPopUp = ({setCurrState}) => {
             const response = await axios.post(url + '/api/user/register', data)
 
             if (response.data.success) {
-                setCurrState('login')
-                toast.success("User Registed.Please login")
+                setToken(response.data.token)
+                localStorage.setItem("token", response.data.token)
+                toast.success(response.data.message)
+                navigate('/userInfoForm')
             }
             else {
                 toast.error(response.data.message)

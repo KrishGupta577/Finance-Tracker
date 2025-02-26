@@ -6,14 +6,32 @@ import AddTransaction from '../EditTransactionPopUp/addTransaction';
 import EditTransaction from '../EditTransactionPopUp/EditTransaction';
 import { StoreContext } from "../../../context/StoreContext"
 import axios from 'axios';
+import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
 
 function Transaction() {
 
+  const { register, watch, handleSubmit, formState: { errors } } = useForm();
   const { url, token, transactions, refreshTransactions } = useContext(StoreContext)
   const [showAddTran, setShowAddTran] = useState(false);
-  const [showEditTran, setShowEditTran] = useState(false)
   const [editTransactionId, setEditTransactionId] = useState(null);
+  const sortBy = watch('sortBy')
+  const sortOrder = watch('sortOrder')
+
+  const sortedTransactions = () => {
+    const sortedData = [...transactions]; // Create a shallow copy to avoid mutating the original array
+    if (sortBy && sortOrder) {
+      sortedData.sort((a, b) => {
+        const fieldA = a[sortBy];
+        const fieldB = b[sortBy];
+
+        if (fieldA < fieldB) return sortOrder === 'asc' ? -1 : 1;
+        if (fieldA > fieldB) return sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+    return sortedData;
+  };
 
   const handleTransactionDelete = async (id) => {
     try {
@@ -30,25 +48,6 @@ function Transaction() {
     }
   }
 
-  const handleTransactionEdit = async (id) => {
-    try {
-      const response = await axios.post(url + "/api/transaction/edit", { id }, { headers: { token } })
-      if (response.data.success) {
-        toast.success(response.data.message)
-        refreshTransactions()
-      }
-      else {
-        toast.error(response.data.message)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const handleEditTransaction = async (id) => {
-
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -60,6 +59,41 @@ function Transaction() {
 
       <div className="transactions-header">
         <h1 className="transactions-title">Transactions</h1>
+        <div className="sort-controls">
+          <div className="sort-group">
+            <label htmlFor="sortBy" className="sort-label">
+              Sort by:
+            </label>
+            <select
+              id="sortBy"
+              name='sortBy' {...register('sortBy')}
+              // value={sortBy}
+              // onChange={(e) => setSortBy(e.target.value)}
+              className="sort-select"
+            >
+              <option value="createdAt">Date</option>
+              <option value="comment">Description</option>
+              <option value="category">Category</option>
+              <option value="expense_category">Expense Category</option>
+              <option value="amount">Amount</option>
+            </select>
+          </div>
+          <div className="sort-group">
+            <label htmlFor="sortOrder" className="sort-label">
+              Order:
+            </label>
+            <select
+              id="sortOrder"
+              name='sortOrder'  {...register('sortOrder')}
+              // value={sortOrder}
+              // onChange={(e) => setSortOrder(e.target.value)}
+              className="sort-select"
+            >
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </div>
         <button className="add-transaction-button" onClick={() => setShowAddTran(true)}>
           Add Transaction
         </button>
@@ -78,7 +112,7 @@ function Transaction() {
               </tr>
             </thead>
             <tbody className="transactions-table-body">
-              {transactions.map((transaction, index) => (
+              {sortedTransactions().map((transaction, index) => (
                 <motion.tr
                   key={index}
                   initial={{ opacity: 0 }}
@@ -87,7 +121,7 @@ function Transaction() {
                   className="transaction-row"
                 >
                   <td className="table-cell date-cell">
-                    {transaction.createdAt.substring(0, 10)}
+                    {transaction.date}
                   </td>
                   <td className="table-cell description-cell">
                     {transaction.comment}
@@ -101,19 +135,17 @@ function Transaction() {
                   <td className="table-cell amount-cell">
                     <div className="amount-container">
                       {transaction.category === 'income' ? (
-                        <ArrowUpRight className="income-icon" />
+                        <ArrowUpRight className="income-icon" color='green' />
                       ) : (
-                        <ArrowDownRight className="expense-icon" />
+                        <ArrowDownRight className="expense-icon" color='red' />
                       )}
                       <span className={transaction.category === 'income' ? 'income-amount' : 'expense-amount'}>
-                        ${Math.abs(transaction.amount).toFixed(2)}
+                        &#8377;{Math.abs(transaction.amount).toFixed(2)}
                       </span>
                     </div>
                   </td>
                   <td className="table-cell action-cell">
-                    <div
-                      className="action-buttons"
-                    >
+                    <div className="action-buttons">
                       <button
                         className="edit-button"
                         onClick={() => setEditTransactionId(transaction._id)}
@@ -121,7 +153,6 @@ function Transaction() {
                       >
                         <Edit size={16} />
                       </button>
-                      {showEditTran && <EditTransaction setShowEditTran={setShowEditTran} id={transaction._id} />}
                       <button
                         className="delete-button"
                         onClick={() => handleTransactionDelete(transaction._id)}

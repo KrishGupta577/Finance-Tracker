@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import {
     Home,
     ArrowRightLeft,
@@ -21,49 +22,47 @@ import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
 import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
+    const { userInfo } = useContext(StoreContext);
+    const location = useLocation();
 
-    const [selectedMenu, setSelectedMenu] = useState(() => {
-        return localStorage.getItem('selectedMenu') || 'Overview';
-    });
-    const {userInfo} = useContext(StoreContext)
     const sidebarMenus = [
-        { name: 'Overview', icon: <Home className={"menu-icon"} /> },
-        { name: 'Transactions', icon: <ArrowRightLeft className={"menu-icon"} /> },
-        { name: 'Insights', icon: <ChartIcon className={"menu-icon"} /> },
-        { name: 'Budget Planner', icon: <Wallet className={"menu-icon"} /> },
-        { name: 'Reports', icon: <FileText className={"menu-icon"} /> },
-        { name: 'Mobile App', icon: <Smartphone className={"menu-icon"} /> },
-        { name: 'Settings', icon: <Settings className={"menu-icon"} /> },
-        { name: 'Logout', icon: <LogOut className={"menu-icon"} /> }
+        { name: 'Overview', path: '/dashboard', icon: <Home className="menu-icon" /> },
+        { name: 'Transactions', path: '/dashboard/transactions', icon: <ArrowRightLeft className="menu-icon" /> },
+        { name: 'Insights', path: '/dashboard/insights', icon: <ChartIcon className="menu-icon" /> },
+        { name: 'Reports', path: '/dashboard/reports', icon: <FileText className="menu-icon" /> },
+        { name: 'Mobile App', path: '/dashboard/mobile-app', icon: <Smartphone className="menu-icon" /> },
+        { name: 'Settings', path: '/dashboard/settings', icon: <Settings className="menu-icon" /> },
+        { name: 'Logout', path: '/dashboard/logout', icon: <LogOut className="menu-icon" /> }
     ];
 
-    const handleMenuClick = (name) => {
-        setSelectedMenu(name);
-        localStorage.setItem('selectedMenu', name);
-    };
+    const pathname = location.pathname.split('/').pop();
+    const currentPage = pathname.charAt(0).toUpperCase() + pathname.slice(1);
 
     useEffect(() => {
-        document.title = `Finance Tracker - ${selectedMenu}`;
-    }, [selectedMenu]);
+        document.title = `Finance Tracker - ${currentPage}`;
+    }, [pathname]);
 
     return (
         <div className="app-container">
             {/* Sidebar */}
-            <div className={`sidebar`}>
+            <div className="sidebar">
                 <div className="sidebar-header">
                     <img src='/logo.svg' alt='logo' />
                     <h1>Finance Tracker</h1>
                 </div>
                 <nav className="sidebar-nav">
                     {sidebarMenus.map((menu) => (
-                        <button
+                        <NavLink
                             key={menu.name}
-                            onClick={() => handleMenuClick(menu.name)}
-                            className={`menu-item ${selectedMenu === menu.name ? 'active' : ''}`}
+                            to={menu.path}
+                            className={({ isActive }) =>
+                                `menu-item ${isActive ? 'active' : ''}`
+                            }
+                            end={menu.path === '/dashboard'} // Add end prop for exact matching on overview
                         >
                             {menu.icon}
                             <span>{menu.name}</span>
-                        </button>
+                        </NavLink>
                     ))}
                 </nav>
             </div>
@@ -73,7 +72,7 @@ const Dashboard = () => {
                 {/* Header */}
                 <header className="header">
                     <div className="header-left">
-                        <h2 className="header-title">{selectedMenu}</h2>
+                        <h2 className="header-title">{currentPage}</h2>
                     </div>
                     <div className="header-right">
                         <button className="notification-btn">
@@ -85,6 +84,7 @@ const Dashboard = () => {
                                 src={userInfo.profile_picture_url}
                                 alt="Profile"
                                 className="profile-image"
+                                referrerPolicy="no-referrer"
                             />
                             <div>
                                 <h3 className="profile-name">{userInfo.name}</h3>
@@ -93,17 +93,16 @@ const Dashboard = () => {
                     </div>
                 </header>
 
-                {/* main content */}
-
-                {selectedMenu === 'Overview' && <Overview />}
-                {selectedMenu === 'Transactions' && <Transaction />}
-                {selectedMenu === 'Insights' && <Insights />}
-                {selectedMenu === 'Reports' && <Reports />}
-                {selectedMenu === 'Settings' && <Setting />}
-                {selectedMenu === 'Mobile App' && <MobileApp />}
-                {selectedMenu === 'Logout' && <LogoutPage />}
-
-
+                {/* Routes */}
+                <Routes>
+                    <Route index element={<Overview />} />
+                    <Route path="transactions" element={<Transaction />} />
+                    <Route path="insights" element={<Insights />} />
+                    <Route path="reports" element={<Reports />} />
+                    <Route path="mobile-app" element={<MobileApp />} />
+                    <Route path="settings" element={<Setting />} />
+                    <Route path="logout" element={<LogoutPage />} />
+                </Routes>
             </div>
         </div>
     );

@@ -29,8 +29,16 @@ const userSchema = new mongoose.Schema({
       },
       login_type: {
         type: String,
-        enum: ['email', 'google'],  // Only 'email' or 'google' are allowed
+        enum: ['email', 'google'], 
         required: true,
+      },
+      monthly_income:{
+        type:Number,
+        default:0,
+        required:true
+      },
+      username:{
+        type:String,
       },
     },
     {

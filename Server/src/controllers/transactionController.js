@@ -6,19 +6,13 @@ const addTransaction = async (req, res) => {
 
         const newTransaction = new transactionModel()
 
-        if (comment) {
-            newTransaction.userId = userId
-            newTransaction.amount = amount;
-            newTransaction.category = category;
-            newTransaction.expense_category = expenseType;
-            newTransaction.comment = comment;
-        }
-        else {
-            newTransaction.userId = userId
-            newTransaction.amount = amount;
-            newTransaction.category = category;
-            newTransaction.expense_category = expenseType;
-        }
+
+        newTransaction.userId = userId
+        newTransaction.amount = amount;
+        newTransaction.category = category;
+        newTransaction.expense_category = expenseType || "";
+        newTransaction.comment = comment || "";
+
 
         await newTransaction.save()
 
@@ -68,7 +62,6 @@ const editTransaction = async (req, res) => {
     try {
         const { id, data, userId } = req.body
         const { amount, category, expenseType, comment } = data
-        console.log(req.body)
 
         if (category === 'income') {
             const transaction = await transactionModel.findByIdAndUpdate(

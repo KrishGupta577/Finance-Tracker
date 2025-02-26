@@ -60,6 +60,7 @@
     white-space: nowrap;
     color: var(--text-color);
     margin: 10px 0px;
+    text-decoration: none;
 }
 
 .menu-item .menu-icon {
@@ -171,4 +172,16 @@
 .profile-name {
     font-weight: 500;
     color: var(--text-color);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
 }

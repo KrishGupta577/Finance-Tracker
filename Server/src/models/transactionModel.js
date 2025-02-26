@@ -21,8 +21,13 @@ const transactionSchema = new mongoose.Schema({
     },
     expense_category:{
         type:String,
-        required:true
+        required:function () {
+            this.category === "expense"
+        }
     },
+    date:{
+        type:Date
+    }
 }, { timestamps: true })
 
 const transactionModel = mongoose.models.transaction || mongoose.model("transaction",transactionSchema)

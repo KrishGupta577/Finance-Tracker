@@ -1,19 +1,47 @@
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Download } from 'lucide-react';
+import {StoreContext} from '../../../context/StoreContext';
 import './Reports.css';
 
-const data = [
-  { month: 'Jan', income: 4000, expenses: 2400 },
-  { month: 'Feb', income: 3000, expenses: 1398 },
-  { month: 'Mar', income: 2000, expenses: 9800 },
-  { month: 'Apr', income: 2780, expenses: 3908 },
-  { month: 'May', income: 1890, expenses: 4800 },
-  { month: 'Jun', income: 2390, expenses: 3800 },
-];
+const Reports = () => {
+  const {transactions} = useContext(StoreContext);
 
-function Reports() {
+  // Generate Income vs Expenses Data
+  const monthlyData = useMemo(() => {
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    
+    // Initialize data structure
+    const dataMap = {};
+    months.forEach(month => {
+      dataMap[month] = { month, income: 0, expenses: 0 };
+    });
+
+    // Populate data from transactions
+    transactions.forEach(txn => {
+      const txnMonth = months[new Date(txn.date).getMonth()]; 
+      if (txn.category === "income") {
+        dataMap[txnMonth].income += txn.amount;
+      } else if (txn.category === "expense") {
+        dataMap[txnMonth].expenses += txn.amount;
+      }
+    });
+
+    return Object.values(dataMap);
+  }, [transactions]);
+
+  const totalIncome = monthlyData.reduce((sum, entry) => sum + entry.income, 0);
+  const totalExpenses = monthlyData.reduce((sum, entry) => sum + entry.expenses, 0);
+  const netSavings = totalIncome - totalExpenses;
+  const avgIncome = (totalIncome / 6).toFixed(2);
+  const avgExpenses = (totalExpenses / 6).toFixed(2);
+
+  const highestIncomeMonth = monthlyData.reduce((max, entry) => entry.income > max.income ? entry : max, { month: "", income: 0 }).month;
+  const highestExpenseMonth = monthlyData.reduce((max, entry) => entry.expenses > max.expenses ? entry : max, { month: "", expenses: 0 }).month;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,15 +58,11 @@ function Reports() {
       </div>
 
       <div className="reports-grid">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="chart-card"
-        >
+        <motion.div className="chart-card">
           <h2 className="card-title">Income vs Expenses</h2>
           <div className="chart-container">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
+              <BarChart data={monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
                 <YAxis />
@@ -51,26 +75,17 @@ function Reports() {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="summary-grid"
-        >
+        <motion.div className="summary-grid">
           <div className="summary-card">
             <h3 className="card-title">Summary</h3>
             <div className="summary-content">
               <div className="summary-item">
-                <p className="summary-label">Total Income</p>
-                <p className="income-value">$16,060</p>
+                <p className="summary-label">Total Credits</p>
+                <p className="income-value">&#8377; {totalIncome.toLocaleString()}</p>
               </div>
               <div className="summary-item">
                 <p className="summary-label">Total Expenses</p>
-                <p className="expense-value">$26,104</p>
-              </div>
-              <div className="summary-item">
-                <p className="summary-label">Net Savings</p>
-                <p className="savings-value">$-10,044</p>
+                <p className="expense-value">&#8377; {totalExpenses.toLocaleString()}</p>
               </div>
             </div>
           </div>
@@ -80,19 +95,19 @@ function Reports() {
             <div className="trends-content">
               <div className="trend-item">
                 <span className="trend-label">Average Monthly Income</span>
-                <span className="trend-value">$2,677</span>
+                <span className="trend-value">&#8377; {avgIncome}</span>
               </div>
               <div className="trend-item">
                 <span className="trend-label">Average Monthly Expenses</span>
-                <span className="trend-value">$4,351</span>
+                <span className="trend-value">&#8377; {avgExpenses}</span>
               </div>
               <div className="trend-item">
                 <span className="trend-label">Highest Income Month</span>
-                <span className="trend-value">January</span>
+                <span className="trend-value">{highestIncomeMonth || "N/A"}</span>
               </div>
               <div className="trend-item">
                 <span className="trend-label">Highest Expense Month</span>
-                <span className="trend-value">March</span>
+                <span className="trend-value">{highestExpenseMonth || "N/A"}</span>
               </div>
             </div>
           </div>
@@ -100,24 +115,30 @@ function Reports() {
           <div className="summary-card">
             <h3 className="card-title">Recommendations</h3>
             <ul className="recommendations-list">
-              <li className="recommendation-item">
-                <span className="recommendation-marker red-marker"></span>
-                <span>Review March expenses - significantly higher than average</span>
-              </li>
-              <li className="recommendation-item">
-                <span className="recommendation-marker yellow-marker"></span>
-                <span>Consider increasing emergency fund due to negative savings</span>
-              </li>
-              <li className="recommendation-item">
-                <span className="recommendation-marker green-marker"></span>
-                <span>Look for additional income sources to improve cash flow</span>
-              </li>
+              {totalExpenses > totalIncome && (
+                <li className="recommendation-item">
+                  <span className="recommendation-marker red-marker"></span>
+                  <span>Review expenses - spending exceeds income</span>
+                </li>
+              )}
+              {highestExpenseMonth && (
+                <li className="recommendation-item">
+                  <span className="recommendation-marker yellow-marker"></span>
+                  <span>Review {highestExpenseMonth} expenses - higher than usual</span>
+                </li>
+              )}
+              {netSavings < 0 && (
+                <li className="recommendation-item">
+                  <span className="recommendation-marker red-marker"></span>
+                  <span>Consider increasing savings or reducing expenses</span>
+                </li>
+              )}
             </ul>
           </div>
         </motion.div>
       </div>
     </motion.div>
   );
-}
+};
 
 export default Reports;

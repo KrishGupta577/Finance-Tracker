@@ -8,23 +8,23 @@ import axios from "axios"
 import { toast } from 'react-toastify';
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { X } from "lucide-react";
 
-const AuthPage = ({setShowLogin}) => {
+const AuthPage = ({ setShowLogin }) => {
 
     const [currState, setCurrState] = useState('login');
-    const { url } = useContext(StoreContext)
-    const { token, setToken } = useContext(StoreContext)
+    const { url, setToken} = useContext(StoreContext)
     const navigate = useNavigate()
 
     return (
         <>
             <div className="auth">
                 <div className="auth-container">
-                    <p onClick={() => setShowLogin(false)} className='auth-cancel'>X</p>
+                    <p onClick={() => setShowLogin(false)} className='auth-cancel'> <X size={30} /> </p>
                     {currState === 'login' ? (
-                        <LoginPopUp setCurrState={setCurrState}/>
+                        <LoginPopUp setCurrState={setCurrState} />
                     ) : (
-                        <SignupPopUp setCurrState={setCurrState}/>
+                        <SignupPopUp setCurrState={setCurrState} />
                     )}
                     <div className='google-link'>
                         <GoogleLogin
@@ -36,9 +36,12 @@ const AuthPage = ({setShowLogin}) => {
                                         toast.success("Welcome")
                                         setToken(response.data.token)
                                         localStorage.setItem("token", response.data.token)
-                                        setTimeout(() => {
+                                        if(response.data.returnUser){
                                             navigate('/dashboard')
-                                        }, 1000);
+                                        }
+                                        else{
+                                            navigate('/userInfoForm')
+                                        }
                                     }
                                     else {
                                         toast.error(response.data.message)

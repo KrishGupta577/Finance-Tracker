@@ -9,7 +9,7 @@ import { StoreContext } from "../../../context/StoreContext"
 const Transaction = ({ setShowAddTran }) => {
 
     const [isLoading, setIsLoading] = useState(false);
-    const { url, token, refreshTransactions } = useContext(StoreContext)
+    const { url, token, refreshTransactions,expenseCategories } = useContext(StoreContext)
     const { register, watch, handleSubmit, formState: { errors } } = useForm();
 
     const selectedCategory = watch("category");
@@ -27,16 +27,7 @@ const Transaction = ({ setShowAddTran }) => {
         },
     }
 
-    const expenseCategories = [
-        "Entertainment",
-        "Food",
-        "Transportation",
-        "Shopping",
-        "Bills",
-        "Healthcare",
-        "Education",
-        "Other"
-    ];
+    
 
     const onHandleError = (error) => { console.log(error) }
 

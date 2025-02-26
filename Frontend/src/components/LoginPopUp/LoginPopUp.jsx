@@ -14,12 +14,10 @@ const LoginPopUp = ({ setCurrState }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { url } = useContext(StoreContext)
-    const { token, setToken } = useContext(StoreContext)
+    const {setToken } = useContext(StoreContext)
     const navigate = useNavigate()
 
-    // Separate form handlers for login and signup
     const loginForm = useForm();
-
 
     const loginValidation = {
         username: {

@@ -35,11 +35,11 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
             login_type: "email",
         })
-
         const user = await newUser.save()
-
+        
+        const token = createToken(user._id)
         mailSender(email,name)
-        res.json({ success: true, message: "User registered." })
+        res.json({ success: true, message: "User registered.", token})
     }
     catch (error) {
         console.log(error);
@@ -86,7 +86,7 @@ const userGoogleLogin = async (req, res) => {
                 return res.json({success:false,message:"User is registered using Email"})
             }    
             const token = createToken(exists._id)
-            return res.json({ success: true, message: "Welcome Back",token })
+            return res.json({ success: true, message: "Welcome Back",token, returnUser:true })
         }
 
         const newUser = new userModel({
@@ -102,7 +102,7 @@ const userGoogleLogin = async (req, res) => {
         const token = createToken(user._id)
 
         mailSender(email,name)
-        res.json({ success: true, message: "User registered.", token })
+        res.json({ success: true, message: "User registered.", token, returnUser:false })
 
 
     } catch (error) {
