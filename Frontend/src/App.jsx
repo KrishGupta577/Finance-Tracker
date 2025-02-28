@@ -17,6 +17,7 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/userInfoForm" element={<ExpenseForm />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/userInfoForm" element={<ExpenseForm />} />
