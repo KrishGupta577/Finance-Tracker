@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
         required: function() {
           return this.login_type === 'google'; // Google ID is required if login_type is "google"
         },
+        default:""
       },
       name: {
         type: String,

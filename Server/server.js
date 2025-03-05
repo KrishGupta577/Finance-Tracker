@@ -1,12 +1,13 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 import express from "express"
 import cors from 'cors'
-import dotenv from "dotenv"
 import { connectDB } from "./src/config/db.js"
 import userRouter from "./src/routes/userRoutes.js"
 import infoRoute from "./src/routes/infoRoute.js"
 import transactionRoute from "./src/routes/transactionRoute.js"
 
-dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT

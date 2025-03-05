@@ -3,35 +3,32 @@ import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import {
     Home,
     ArrowRightLeft,
-    LineChart as ChartIcon,
-    Wallet,
     FileText,
     Smartphone,
     Settings,
     LogOut,
     BellIcon,
+    User,
 } from 'lucide-react';
 import './Dashboard.css';
-import Overview from '../../components/AfterLogin/Overview/Overview';
-import Transaction from '../../components/AfterLogin/Transaction/Transaction';
-import Insights from '../../components/AfterLogin/Insights/Insights';
-import Reports from '../../components/AfterLogin/Reports/Reports';
-import Setting from '../../components/AfterLogin/SettingPage/Setting';
-import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
-import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
-import { StoreContext } from '../../context/StoreContext';
+// import Overview from '../../components/AfterLogin/Overview/Overview';
+// import Transaction from '../../components/AfterLogin/Transaction/Transaction';
+// import Insights from '../../components/AfterLogin/Insights/Insights';
+// import Reports from '../../components/AfterLogin/Reports/Reports';
+// import Setting from '../../components/AfterLogin/SettingPage/Setting';
+// import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
+// import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
+// import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
-    const { userInfo } = useContext(StoreContext);
+    // const { userInfo } = useContext(StoreContext);
     const location = useLocation();
-
 
     const sidebarMenus = [
         { name: 'Overview', path: '/dashboard', icon: <Home className="menu-icon" /> },
         { name: 'Transactions', path: '/dashboard/transactions', icon: <ArrowRightLeft className="menu-icon" /> },
-        { name: 'Insights', path: '/dashboard/insights', icon: <ChartIcon className="menu-icon" /> },
+        { name: 'Users', path: '/dashboard/insights', icon: <User className="menu-icon" /> },
         { name: 'Reports', path: '/dashboard/reports', icon: <FileText className="menu-icon" /> },
-        { name: 'Mobile App', path: '/dashboard/mobile-app', icon: <Smartphone className="menu-icon" /> },
         { name: 'Settings', path: '/dashboard/settings', icon: <Settings className="menu-icon" /> },
         { name: 'Logout', path: '/dashboard/logout', icon: <LogOut className="menu-icon" /> }
     ];
@@ -42,7 +39,6 @@ const Dashboard = () => {
     useEffect(() => {
         document.title = `Finance Tracker - ${currentPage}`;
     }, [pathname]);
-
 
     return (
         <div className="app-container">
@@ -83,20 +79,20 @@ const Dashboard = () => {
                         </button>
                         <div className="profile-info">
                             <img
-                                src={userInfo.profile_picture_url}
+                                src='/profile_photo.png'
                                 alt="Profile"
                                 className="profile-image"
                                 referrerPolicy="no-referrer"
                             />
                             <div>
-                                <h3 className="profile-name">{userInfo.name}</h3>
+                                <h3 className="profile-name">John Doe</h3>
                             </div>
                         </div>
                     </div>
                 </header>
 
                 {/* Routes */}
-                <Routes>
+                {/* <Routes>
                     <Route index element={<Overview />} />
                     <Route path="transactions" element={<Transaction />} />
                     <Route path="insights" element={<Insights />} />
@@ -104,7 +100,7 @@ const Dashboard = () => {
                     <Route path="mobile-app" element={<MobileApp />} />
                     <Route path="settings" element={<Setting />} />
                     <Route path="logout" element={<LogoutPage />} />
-                </Routes>
+                </Routes> */}
             </div>
         </div>
     );

@@ -42,10 +42,6 @@ const ExpenseForm = () => {
         },
         username: {
             required: "Please enter a username",
-            pattern: {
-                value: /^[A-Za-z0-9_]{3,20}$/,
-                message: "Username should be 3-20 characters (letters, numbers, underscore)"
-            }
         },
         email: {},
         phone: {

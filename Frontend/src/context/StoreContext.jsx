@@ -56,6 +56,7 @@ const StoreContextProvider = (props) => {
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
+            console.log(token)
           setToken(storedToken);
         }
       }, []);

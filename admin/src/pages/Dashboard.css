@@ -1,0 +1,187 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-color);
+}
+
+.sidebar {
+    width: 4%;
+    background-color: var(--secondary-bg-color);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.sidebar:hover {
+    width: 15%;
+}
+
+.sidebar-header {
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.sidebar-header img {
+    width: 32px;
+    height: 32px;
+    min-width: 32px; /* Prevents logo from shrinking */
+    margin-left: 5px;
+}
+
+.sidebar-header h1 {
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--button-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .sidebar-header h1 {
+    opacity: 1;
+}
+
+.sidebar-nav {
+    margin-top: 30px;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    color: var(--text-color);
+    margin: 10px 0px;
+    text-decoration: none;
+}
+
+.menu-item .menu-icon {
+    min-width: 24px; /* Prevents icon from shrinking */
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .menu-item span {
+    opacity: 1;
+}
+
+.menu-item:hover{
+    background-color: var(--button-hover-color);
+}
+
+.menu-item:hover span{
+    color: white;
+} 
+
+.menu-item.active {
+    background-color: var(--button-color);
+    color: var(--secondary-bg-color);
+}
+
+.menu-item.active span{
+    color: white;
+}
+
+.menu-icon {
+    margin: 0px 5px;
+}
+
+.main-content {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: var(--secondary-bg-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}    
+
+.header-left h2{
+    color: var(--button-color);
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0px 30px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification-btn {
+    position: relative;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.notification-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    gap: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}

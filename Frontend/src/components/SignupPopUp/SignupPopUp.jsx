@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignupPopUp = ({setCurrState}) => {
 
-    const { url } = useContext(StoreContext)
+    const { url,setToken } = useContext(StoreContext)
     const [isLoading, setIsLoading] = useState(false);
     const signupForm = useForm();
     const navigate = useNavigate()
