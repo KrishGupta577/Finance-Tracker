@@ -17,7 +17,8 @@ import './Dashboard.css';
 // import Reports from '../../components/AfterLogin/Reports/Reports';
 // import Setting from '../../components/AfterLogin/SettingPage/Setting';
 // import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
-// import LogoutPage from '../../components/AfterLogin/LogoutPage/LogoutPage';
+import LogoutPage from '../../Components/LogoutPage/Logout';
+import SettingPage from '../../Components/SettingPage/SettingPage';
 // import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
@@ -92,15 +93,17 @@ const Dashboard = () => {
                 </header>
 
                 {/* Routes */}
-                {/* <Routes>
-                    <Route index element={<Overview />} />
-                    <Route path="transactions" element={<Transaction />} />
-                    <Route path="insights" element={<Insights />} />
-                    <Route path="reports" element={<Reports />} />
-                    <Route path="mobile-app" element={<MobileApp />} />
-                    <Route path="settings" element={<Setting />} />
+
+                {/* <Route index element={<Overview />} />
+                <Route path="transactions" element={<Transaction />} />
+                <Route path="insights" element={<Insights />} />
+                <Route path="reports" element={<Reports />} />
+                <Route path="mobile-app" element={<MobileApp />} /> */}
+
+                <Routes>
                     <Route path="logout" element={<LogoutPage />} />
-                </Routes> */}
+                    <Route path="settings" element={<SettingPage />} />
+                </Routes>
             </div>
         </div>
     );
