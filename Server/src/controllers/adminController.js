@@ -1,4 +1,6 @@
 import adminModel from "../models/adminModel.js";
+import userModel from "../models/userModel.js";
+import transactionModel from "../models/transactionModel.js";
 import jwt from 'jsonwebtoken'
 import validator from 'validator'
 import bcrypt from 'bcrypt'
@@ -40,4 +42,26 @@ const adminLogin = async (req, res) => {
     }
 }
 
-export { adminLogin }
+const usersList = async (req, res) => {
+    try {
+        const usersList = await userModel.find({}, "-password")
+
+        res.json({ success: true, usersList })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: true, message: "Error" })
+    }
+}
+
+const transactionsList = async (req, res) => {
+    try {
+        const transactionsList = await transactionModel.find()
+
+        res.json({ success: true, transactionsList })
+
+    } catch (error) {       
+        res.json({ success: false, message: "Error" })
+    }
+}
+export { adminLogin, usersList, transactionsList }

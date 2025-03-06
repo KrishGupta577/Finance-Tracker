@@ -5,8 +5,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 
-
 function App() {
+
   return (
     <>
       <ToastContainer />

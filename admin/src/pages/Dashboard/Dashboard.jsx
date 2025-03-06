@@ -4,24 +4,28 @@ import {
     Home,
     ArrowRightLeft,
     FileText,
-    Smartphone,
     Settings,
     LogOut,
     BellIcon,
     User,
 } from 'lucide-react';
 import './Dashboard.css';
-// import Overview from '../../components/AfterLogin/Overview/Overview';
-// import Transaction from '../../components/AfterLogin/Transaction/Transaction';
-// import Reports from '../../components/AfterLogin/Reports/Reports';
-// import Setting from '../../components/AfterLogin/SettingPage/Setting';
-// import UsersList from '../../Components/UsersList/UsersList';
+import UsersList from '../../Components/UsersList/UsersList';
 import LogoutPage from '../../Components/LogoutPage/Logout';
 import SettingPage from '../../Components/SettingPage/SettingPage';
-// import { StoreContext } from '../../context/StoreContext';
+import { StoreContext } from '../../Context/StoreContext';
+import OverviewPage from '../../Components/OverviewPage/OverviewPage';
 
 const Dashboard = () => {
     const location = useLocation();
+
+    const { usersList,transactionsList } = useContext(StoreContext)
+    const token = localStorage.getItem('token')
+
+    useEffect( ()=> {
+        usersList(token)
+        transactionsList(token)
+    },[])
 
     const sidebarMenus = [
         { name: 'Overview', path: '/admin/dashboard', icon: <Home className="menu-icon" /> },
@@ -55,7 +59,7 @@ const Dashboard = () => {
                             className={({ isActive }) =>
                                 `menu-item ${isActive ? 'active' : ''}`
                             }
-                            end={menu.path === '/dashboard'} // Add end prop for exact matching on overview
+                            end={menu.path === '/admin/dashboard'}
                         >
                             {menu.icon}
                             <span>{menu.name}</span>
@@ -92,16 +96,17 @@ const Dashboard = () => {
 
                 {/* Routes */}
 
-                {/* <Route index element={<Overview />} />
+                {/*
                 <Route path="transactions" element={<Transaction />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="mobile-app" element={<MobileApp />} /> 
                 */}
 
                 <Routes>
-                    {/* <Route path="users" element={<UsersList />} /> */}
+                    <Route index element={<OverviewPage />} />
                     <Route path="logout" element={<LogoutPage />} />
                     <Route path="settings" element={<SettingPage />} />
+                    <Route path="users" element={<UsersList />} />
                 </Routes>
             </div>
         </div>

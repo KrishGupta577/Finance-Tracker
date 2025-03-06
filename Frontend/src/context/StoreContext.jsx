@@ -31,7 +31,7 @@ const StoreContextProvider = (props) => {
 
     const transactionList = async (token) => {
         try {
-            const response = await axios.get(url + "/api/transaction/get", { headers: { token } })
+            const response = await axios.get(url + "/api/transaction/get", {}, { headers: { token } })
             console.log(response)
             if (response.data.success) {
                 setTransactions(response.data.transactions)
@@ -44,7 +44,7 @@ const StoreContextProvider = (props) => {
 
     const userInfoFunction = async (token) => {
         try {
-            const response = await axios.get(url + "/api/user/info", { headers: { token } })
+            const response = await axios.get(url + "/api/user/info", {}, { headers: { token } })
             if (response.data.userInfo) {
                 setUserInfo(response.data.userInfo)
             }
@@ -57,16 +57,16 @@ const StoreContextProvider = (props) => {
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
             console.log(token)
-          setToken(storedToken);
+            setToken(storedToken);
         }
-      }, []);
-    
-      useEffect(() => {
+    }, []);
+
+    useEffect(() => {
         if (token) {
-          transactionList(token);
-          userInfoFunction(token);
+            transactionList(token);
+            userInfoFunction(token);
         }
-      }, [token]);
+    }, [token]);
 
     const contextValue = {
         url,
@@ -76,8 +76,8 @@ const StoreContextProvider = (props) => {
         userInfo,
         expenseCategories,
         data,
-        refreshTransactions: () => transactionList(token), 
-        refreshUserInfo: () => userInfoFunction(token)  
+        refreshTransactions: () => transactionList(token),
+        refreshUserInfo: () => userInfoFunction(token)
     }
 
     return (
