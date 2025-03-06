@@ -13,25 +13,23 @@ import {
 import './Dashboard.css';
 // import Overview from '../../components/AfterLogin/Overview/Overview';
 // import Transaction from '../../components/AfterLogin/Transaction/Transaction';
-// import Insights from '../../components/AfterLogin/Insights/Insights';
 // import Reports from '../../components/AfterLogin/Reports/Reports';
 // import Setting from '../../components/AfterLogin/SettingPage/Setting';
-// import MobileApp from '../../components/AfterLogin/MobileApp/MobileApp';
+// import UsersList from '../../Components/UsersList/UsersList';
 import LogoutPage from '../../Components/LogoutPage/Logout';
 import SettingPage from '../../Components/SettingPage/SettingPage';
 // import { StoreContext } from '../../context/StoreContext';
 
 const Dashboard = () => {
-    // const { userInfo } = useContext(StoreContext);
     const location = useLocation();
 
     const sidebarMenus = [
-        { name: 'Overview', path: '/dashboard', icon: <Home className="menu-icon" /> },
-        { name: 'Transactions', path: '/dashboard/transactions', icon: <ArrowRightLeft className="menu-icon" /> },
-        { name: 'Users', path: '/dashboard/insights', icon: <User className="menu-icon" /> },
-        { name: 'Reports', path: '/dashboard/reports', icon: <FileText className="menu-icon" /> },
-        { name: 'Settings', path: '/dashboard/settings', icon: <Settings className="menu-icon" /> },
-        { name: 'Logout', path: '/dashboard/logout', icon: <LogOut className="menu-icon" /> }
+        { name: 'Overview', path: '/admin/dashboard', icon: <Home className="menu-icon" /> },
+        { name: 'Transactions', path: '/admin/dashboard/transactions', icon: <ArrowRightLeft className="menu-icon" /> },
+        { name: 'Users', path: '/admin/dashboard/users', icon: <User className="menu-icon" /> },
+        { name: 'Reports', path: '/admin/dashboard/reports', icon: <FileText className="menu-icon" /> },
+        { name: 'Settings', path: '/admin/dashboard/settings', icon: <Settings className="menu-icon" /> },
+        { name: 'Logout', path: '/admin/dashboard/logout', icon: <LogOut className="menu-icon" /> }
     ];
 
     const pathname = location.pathname.split('/').pop();
@@ -96,11 +94,12 @@ const Dashboard = () => {
 
                 {/* <Route index element={<Overview />} />
                 <Route path="transactions" element={<Transaction />} />
-                <Route path="insights" element={<Insights />} />
                 <Route path="reports" element={<Reports />} />
-                <Route path="mobile-app" element={<MobileApp />} /> */}
+                <Route path="mobile-app" element={<MobileApp />} /> 
+                */}
 
                 <Routes>
+                    {/* <Route path="users" element={<UsersList />} /> */}
                     <Route path="logout" element={<LogoutPage />} />
                     <Route path="settings" element={<SettingPage />} />
                 </Routes>

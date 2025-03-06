@@ -1,8 +1,8 @@
-.transactions-container {
+.users-container {
   padding: 1.5rem;
 }
 
-.transactions-header {
+.users-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,13 +54,13 @@
   font-size: 14px;
 }
 
-.transactions-title {
+.users-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: #1f2937;
 }
 
-.add-transaction-button {
+.add-user-button {
   padding: 0.5rem 1rem;
   background-color: var(--button-color);
   color: white;
@@ -70,28 +70,28 @@
   transition: background-color 0.3s;
 }
 
-.add-transaction-button:hover {
+.add-user-button:hover {
   background-color: var(--button-hover-color);
 }
 
-.transactions-table-container {
+.users-table-container {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.transactions-table-wrapper {
+.users-table-wrapper {
   overflow-x: auto;
 }
 
-.transactions-table {
+.users-table {
   min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-.transactions-table-header {
+.users-table-header {
   background-color: #f9fafb;
 }
 
@@ -106,15 +106,15 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
-.transactions-table-body {
+.users-table-body {
   background-color: white;
 }
 
-.transaction-row {
+.user-row {
   transition: background-color 0.3s;
 }
 
-.transaction-row:not(:last-child) {
+.user-row:not(:last-child) {
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -124,42 +124,65 @@
   font-size: 0.875rem;
 }
 
-.date-cell {
-  color: #6b7280;
-}
-
-.description-cell {
+.name-cell {
   font-weight: 500;
   color: #111827;
 }
 
-.category-cell {
+.email-cell {
+  color: #4b5563;
+}
+
+.role-cell, .status-cell {
+  text-align: center;
+}
+
+.date-cell {
   color: #6b7280;
 }
 
-.amount-container {
-  display: flex;
-  align-items: center;
+.role-badge, .status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
-.income-icon,
-.expense-icon {
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.25rem;
+.role-badge.admin {
+  background-color: #818cf8;
+  color: white;
 }
 
-.income-amount {
-  color: #10b981;
+.role-badge.user {
+  background-color: #93c5fd;
+  color: #1e3a8a;
 }
 
-.expense-amount {
-  color: #ef4444;
+.role-badge.manager {
+  background-color: #a78bfa;
+  color: white;
+}
+
+.status-badge.active {
+  background-color: #a7f3d0;
+  color: #065f46;
+}
+
+.status-badge.inactive {
+  background-color: #fca5a5;
+  color: #7f1d1d;
+}
+
+.status-badge.pending {
+  background-color: #fcd34d;
+  color: #78350f;
 }
 
 .action-cell {
   padding: 8px;
-  width: 100px;
+  width: 150px;
 }
 
 .action-buttons {
@@ -170,7 +193,8 @@
 }
 
 .edit-button,
-.delete-button {
+.delete-button,
+.status-button {
   padding: 6px;
   border-radius: 4px;
   border: none;
@@ -199,6 +223,23 @@
   background-color: #dc2626;
 }
 
-.transaction-row:hover .action-buttons {
+.status-button {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+.status-button:hover {
+  background-color: #7c3aed;
+}
+
+.activate-icon {
+  color: #10b981;
+}
+
+.deactivate-icon {
+  color: #f3f4f6;
+}
+
+.user-row:hover .action-buttons {
   opacity: 1;
 }

@@ -13,10 +13,12 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     overflow: hidden;
+    animation: containerFadeIn 1s;
 }
 
 .login-content {
     padding: 40px;
+    animation: containerFadeIn 1s;
 }
 
 .login-header {
@@ -122,4 +124,17 @@
 .login-button:active {
     transform: translateY(1px);
     box-shadow: none;
+}
+
+.login-button span{
+    color: white;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-error{
+    text-align: center;
+    color: red;
 }
