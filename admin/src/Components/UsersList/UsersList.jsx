@@ -1,15 +1,21 @@
 import { motion } from 'framer-motion';
-import { Edit, Trash2} from 'lucide-react';
-import { useContext, useState } from 'react';
+import { Edit, Trash2 } from 'lucide-react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { StoreContext } from "../../Context/StoreContext";
 import './UsersList.css';
 
 function UsersList() {
-  const { users,transactions } = useContext(StoreContext);
+  const { users, transactions } = useContext(StoreContext);
 
   console.log(transactions)
+
+  const transactionCount = (id) => {
+    return transactions
+      .filter(transaction => { return transaction.userId == id })
+      .length
+  }
 
   const handleUserDelete = async (id) => {
     try {
@@ -76,7 +82,7 @@ function UsersList() {
                   </td>
                   <td className="table-cell status-cell">
                     <span className={`status-badge `}>
-                      {/* {user.status} */}
+                    {transactionCount(user._id)}
                     </span>
                   </td>
                   <td className="table-cell action-cell">

@@ -49,7 +49,7 @@ const StoreContextProvider = (props) => {
     if(token){
       transactionsList(token)
     }
-  })
+  },[])
 
   const contextValue = {
     url,
@@ -58,6 +58,7 @@ const StoreContextProvider = (props) => {
     usersList,
     transactionsList,
     users,
+    transactions
   }
 
   return (

@@ -103,7 +103,7 @@ function Transaction() {
           <table className="transactions-table">
             <thead className="transactions-table-header">
               <tr>
-                <th className="table-header-cell">Date</th>
+                <th className="table-header-cell">Date (M/D/Y)</th>
                 <th className="table-header-cell">Description</th>
                 <th className="table-header-cell">Category</th>
                 <th className="table-header-cell">Expense Category</th>
@@ -121,7 +121,7 @@ function Transaction() {
                   className="transaction-row"
                 >
                   <td className="table-cell date-cell">
-                    {transaction.date}
+                  {new Date(transaction.date).toLocaleDateString()}
                   </td>
                   <td className="table-cell description-cell">
                     {transaction.comment}

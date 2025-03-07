@@ -31,8 +31,8 @@ const StoreContextProvider = (props) => {
 
     const transactionList = async (token) => {
         try {
-            const response = await axios.get(url + "/api/transaction/get", {}, { headers: { token } })
-            console.log(response)
+            const response = await axios.get(url + "/api/transaction/get", { headers: { token } })
+            // console.log(response)
             if (response.data.success) {
                 setTransactions(response.data.transactions)
             }
@@ -44,7 +44,7 @@ const StoreContextProvider = (props) => {
 
     const userInfoFunction = async (token) => {
         try {
-            const response = await axios.get(url + "/api/user/info", {}, { headers: { token } })
+            const response = await axios.get(url + "/api/user/info", { headers: { token } })
             if (response.data.userInfo) {
                 setUserInfo(response.data.userInfo)
             }

@@ -15,23 +15,23 @@ import LogoutPage from '../../Components/LogoutPage/Logout';
 import SettingPage from '../../Components/SettingPage/SettingPage';
 import { StoreContext } from '../../Context/StoreContext';
 import OverviewPage from '../../Components/OverviewPage/OverviewPage';
+import TransactionsPage from '../../Components/TransactionsPage/TransactionsPage';
 
 const Dashboard = () => {
     const location = useLocation();
 
-    const { usersList,transactionsList } = useContext(StoreContext)
+    const { usersList, transactionsList } = useContext(StoreContext)
     const token = localStorage.getItem('token')
 
-    useEffect( ()=> {
+    useEffect(() => {
         usersList(token)
         transactionsList(token)
-    },[])
+    }, [])
 
     const sidebarMenus = [
         { name: 'Overview', path: '/admin/dashboard', icon: <Home className="menu-icon" /> },
         { name: 'Transactions', path: '/admin/dashboard/transactions', icon: <ArrowRightLeft className="menu-icon" /> },
         { name: 'Users', path: '/admin/dashboard/users', icon: <User className="menu-icon" /> },
-        { name: 'Reports', path: '/admin/dashboard/reports', icon: <FileText className="menu-icon" /> },
         { name: 'Settings', path: '/admin/dashboard/settings', icon: <Settings className="menu-icon" /> },
         { name: 'Logout', path: '/admin/dashboard/logout', icon: <LogOut className="menu-icon" /> }
     ];
@@ -97,13 +97,13 @@ const Dashboard = () => {
                 {/* Routes */}
 
                 {/*
-                <Route path="transactions" element={<Transaction />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="mobile-app" element={<MobileApp />} /> 
                 */}
 
                 <Routes>
                     <Route index element={<OverviewPage />} />
+                    <Route path="transactions" element={<TransactionsPage />} />
                     <Route path="logout" element={<LogoutPage />} />
                     <Route path="settings" element={<SettingPage />} />
                     <Route path="users" element={<UsersList />} />
