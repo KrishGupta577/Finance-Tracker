@@ -36,10 +36,10 @@ const registerUser = async (req, res) => {
             login_type: "email",
         })
         const user = await newUser.save()
-        
+
         const token = createToken(user._id)
-        mailSender(email,name)
-        res.json({ success: true, message: "User registered.", token})
+        mailSender(email, name)
+        res.json({ success: true, message: "User registered.", token })
     }
     catch (error) {
         console.log(error);
@@ -53,8 +53,8 @@ const userLogin = async (req, res) => {
 
         const user = await userModel.findOne({ email: username })
 
-        if(user.login_type === "google"){
-            return res.json({success:false,message:"User is registered using Google"})
+        if (user.login_type === "google") {
+            return res.json({ success: false, message: "User is registered using Google" })
         }
 
         if (!user) {
@@ -82,11 +82,11 @@ const userGoogleLogin = async (req, res) => {
         const exists = await userModel.findOne({ email })
 
         if (exists) {
-            if(exists.login_type === "email"){
-                return res.json({success:false,message:"User is registered using Email"})
-            }    
+            if (exists.login_type === "email") {
+                return res.json({ success: false, message: "User is registered using Email" })
+            }
             const token = createToken(exists._id)
-            return res.json({ success: true, message: "Welcome Back",token, returnUser:true })
+            return res.json({ success: true, message: "Welcome Back", token, returnUser: true })
         }
 
         const newUser = new userModel({
@@ -101,8 +101,8 @@ const userGoogleLogin = async (req, res) => {
 
         const token = createToken(user._id)
 
-        mailSender(email,name)
-        res.json({ success: true, message: "User registered.", token, returnUser:false })
+        mailSender(email, name)
+        res.json({ success: true, message: "User registered.", token, returnUser: false })
 
 
     } catch (error) {
@@ -111,4 +111,21 @@ const userGoogleLogin = async (req, res) => {
     }
 }
 
-export { registerUser, userLogin, userGoogleLogin }
+const userDelete = async (req, res) => {
+    try {
+        const { id } = req.body
+        console.log(id)
+        const user = await userModel.findByIdAndDelete(id)
+
+        if(!user){
+            return res.json({success:false,message:'User not found.'})
+        }
+
+        res.json({success:true,message:'User Deleted.'})
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export { registerUser, userLogin, userGoogleLogin ,userDelete}

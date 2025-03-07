@@ -9,6 +9,7 @@ const StoreContextProvider = (props) => {
   const [transactions, setTransactions] = useState([])
   const url = 'http://localhost:5000'
   const [token, setToken] = useState('')
+  const tokenKey = localStorage.getItem('token')
 
   const usersList = async (token) => {
     try {
@@ -58,7 +59,8 @@ const StoreContextProvider = (props) => {
     usersList,
     transactionsList,
     users,
-    transactions
+    transactions,
+    refreshUsers : () => {usersList(tokenKey)}
   }
 
   return (

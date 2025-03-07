@@ -21,7 +21,7 @@ const LoginPopUp = ({ setCurrState }) => {
 
     const loginValidation = {
         username: {
-            required: "Username or Email is required",
+            required: "Email is required",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 message: "Invalid email address"
@@ -79,13 +79,13 @@ const LoginPopUp = ({ setCurrState }) => {
                 <div className="input-group">
                     <div className='input-group-title'>
                         <User size={20} color='green' />
-                        <label htmlFor="username">Username or Email</label>
+                        <label htmlFor="username">Email</label>
                     </div>
                     <input
                         type="email"
                         id="username"
                         {...loginForm.register('username', loginValidation.username)}
-                        placeholder="Enter your username or Email"
+                        placeholder="Enter your Email"
                     />
                     {loginForm.formState.errors.username && (
                         <p className="error-message">{loginForm.formState.errors.username.message}</p>

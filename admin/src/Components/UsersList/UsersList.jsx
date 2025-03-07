@@ -7,9 +7,9 @@ import { StoreContext } from "../../Context/StoreContext";
 import './UsersList.css';
 
 function UsersList() {
-  const { users, transactions } = useContext(StoreContext);
+  const { users, transactions, url, refreshUsers } = useContext(StoreContext);
 
-  console.log(transactions)
+  const token = localStorage.getItem('token')
 
   const transactionCount = (id) => {
     return transactions
@@ -19,7 +19,7 @@ function UsersList() {
 
   const handleUserDelete = async (id) => {
     try {
-      const response = await axios.post(url + "", { id }, { headers: { token } });
+      const response = await axios.post(url + "/api/user/delete", { id }, { headers: { token } });
       if (response.data.success) {
         toast.success(response.data.message);
         refreshUsers();
@@ -82,7 +82,7 @@ function UsersList() {
                   </td>
                   <td className="table-cell status-cell">
                     <span className={`status-badge `}>
-                    {transactionCount(user._id)}
+                      {transactionCount(user._id)}
                     </span>
                   </td>
                   <td className="table-cell action-cell">

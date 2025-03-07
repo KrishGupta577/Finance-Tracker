@@ -64,4 +64,6 @@ const transactionsList = async (req, res) => {
         res.json({ success: false, message: "Error" })
     }
 }
+
+
 export { adminLogin, usersList, transactionsList }
