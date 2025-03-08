@@ -7,6 +7,7 @@ import "./Logout.css"
 function LogoutPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutComplete, setLogoutComplete] = useState(false);
+  const {setColorTheme} = useContext(StoreContext)
   const navigate = useNavigate()
   
   const handleLogout = () => {
@@ -20,6 +21,7 @@ function LogoutPage() {
     
       setTimeout(() => {
          navigate("/")
+         setColorTheme('light')
       }, 2000);
     }, 1500);
   };

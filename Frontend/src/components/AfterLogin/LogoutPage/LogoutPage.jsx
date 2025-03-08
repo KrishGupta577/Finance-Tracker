@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LogOut, AlertCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import "./LogoutPage.css"
+import {StoreContext} from '../../../context/StoreContext'
 
 function LogoutPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutComplete, setLogoutComplete] = useState(false);
+  const {setColorTheme} = useContext(StoreContext)
   const navigate = useNavigate()
 
   const handleLogout = () => {
     setIsLoggingOut(true);
     sessionStorage.clear()
     localStorage.clear()
-
+    
     setTimeout(() => {
       setIsLoggingOut(false);
       setLogoutComplete(true);
-
+      
       setTimeout(() => {
+        setColorTheme('light')
         navigate("/")
       }, 2000);
     }, 1500);
