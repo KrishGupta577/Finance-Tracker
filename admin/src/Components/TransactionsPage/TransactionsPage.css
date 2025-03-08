@@ -1,77 +1,24 @@
 /* General styles */
-.dashboard-container {
+.transaction-container {
     padding: 24px;
-    background-color: #f9fafb;
-    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    margin-top: 30px;
+    
 }
 
-h1 {
+.transaction-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 24px;
     text-align: center;
-    color: #333;
-}
-
-/* Summary Cards */
-.summary-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.card {
-    background: #ffffff;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.card h3 {
-    font-size: 14px;
-    color: #666;
-}
-
-.card p {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-.income {
-    color: #28a745;
-}
-
-.expenses {
-    color: #dc3545;
-}
-
-.balance {
-    color: #007bff;
+    color: var(--text-color);
 }
 
 /* Charts Section */
-.charts-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 24px;
-}
-
-.chart-card {
-    background: #ffffff;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.chart-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #333;
+.transaction-chart-container {
+    box-shadow: var(--box-shadow);
+    margin: 50px 0px;
+    padding: 40px 30px 40px 0px;
 }
 
 /* Responsive Design */

@@ -72,34 +72,6 @@ function Setting() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="settings-card"
-          >
-            <div className="card-section-header">
-              <Bell className="section-icon" />
-              <h2 className="section-title">Notifications</h2>
-            </div>
-            <div className="notification-options">
-              <div className="toggle-option">
-                <span>Email Notifications</span>
-                <label className="toggle-switch">
-                  <input type="checkbox" className="toggle-input" />
-                  <div className="toggle-slider"></div>
-                </label>
-              </div>
-              <div className="toggle-option">
-                <span>Push Notifications</span>
-                <label className="toggle-switch">
-                  <input type="checkbox" className="toggle-input" defaultChecked />
-                  <div className="toggle-slider"></div>
-                </label>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="settings-card"
           >
@@ -120,41 +92,6 @@ function Setting() {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="two-column-grid"
-        >
-          <div className="settings-card">
-            <div className="card-section-header">
-              <CreditCard className="section-icon" />
-              <h2 className="section-title">Payment Methods</h2>
-            </div>
-            <button className="primary-button">
-              Add Payment Method
-            </button>
-          </div>
-
-          <div className="settings-card">
-            <div className="card-section-header">
-              <HelpCircle className="section-icon" />
-              <h2 className="section-title">Help & Support</h2>
-            </div>
-            <div className="support-options">
-              <button className="link-button">
-                FAQs
-              </button>
-              <button className="link-button">
-                Contact Support
-              </button>
-              <button className="link-button">
-                Report an Issue
-              </button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.div>
   );

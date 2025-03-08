@@ -45,69 +45,63 @@ function UsersList() {
         <h1 className="users-title">User Management</h1>
       </div>
       <div className="users-table-container">
-        <div className="users-table-wrapper">
-          <table className="users-table">
-            <thead className="users-table-header">
-              <tr>
-                <th className="table-header-cell">Name</th>
-                <th className="table-header-cell">Email</th>
-                <th className="table-header-cell">Username</th>
-                <th className="table-header-cell">Registration Date</th>
-                <th className="table-header-cell">Total Transactions</th>
-                <th className="table-header-cell">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="users-table-body">
-              {users && users.map((user, index) => (
-                <motion.tr
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  whileHover={{ backgroundColor: '#F9FAFB' }}
-                  className="user-row"
-                >
-                  <td className="table-cell name-cell">
-                    {user.name}
-                  </td>
-                  <td className="table-cell email-cell">
-                    {user.email}
-                  </td>
-                  <td className="table-cell role-cell">
-                    <span className={`role-badge`}>
-                      {user.username}
-                    </span>
-                  </td>
-                  <td className="table-cell date-cell">
-                    {new Date(user.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="table-cell status-cell">
-                    <span className={`status-badge `}>
-                      {transactionCount(user._id)}
-                    </span>
-                  </td>
-                  <td className="table-cell action-cell">
-                    <div className="action-buttons">
-                      <button
-                        className="edit-button"
-                        onClick={() => setEditUserId(user._id)}
-                        title="Edit user"
-                      >
-                        <Edit size={16} />
-                      </button>
-                      <button
-                        className="delete-button"
-                        onClick={() => handleUserDelete(user._id)}
-                        title="Delete user"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <table className="users-table">
+          <thead className="users-table-header">
+            <tr>
+              <th className="table-header-cell">Name</th>
+              <th className="table-header-cell">Email</th>
+              <th className="table-header-cell">Username</th>
+              <th className="table-header-cell">Registration Date</th>
+              <th className="table-header-cell">Total Transactions</th>
+              <th className="table-header-cell">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="users-table-body">
+            {users && users.map((user, index) => (
+              <motion.tr
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                whileHover={{ backgroundColor: '#F9FAFB' }}
+                className="user-row"
+              >
+                <td className="table-cell name-cell">
+                  {user.name}
+                </td>
+                <td className="table-cell email-cell">
+                  {user.email}
+                </td>
+                <td className="table-cell role-cell">
+                  {user.username}
+                </td>
+                <td className="table-cell date-cell">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </td>
+                <td className="table-cell status-cell">
+                  {transactionCount(user._id)}
+                </td>
+                <td className="table-cell action-cell">
+                  <div className="action-buttons">
+                    <button
+                      className="edit-button"
+                      onClick={() => setEditUserId(user._id)}
+                      title="Edit user"
+                    >
+                      <Edit size={16} />
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleUserDelete(user._id)}
+                      title="Delete user"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </motion.div>
   );

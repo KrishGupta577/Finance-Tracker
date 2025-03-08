@@ -28,17 +28,16 @@ const Dashboard = () => {
     const transactionData = countTransactionsPerMonth(transactions);
 
     return (
-        <div className="dashboard-container">
-            <h1 className="dashboard-title">Yearly Transactions - {currentYear}</h1>
+        <div className="transaction-container">
+            <h1 className="transaction-title">Yearly Transactions - {currentYear}</h1>
 
             {/* Monthly Overview Chart */}
-            <div className="chart-container">
+            <div className="transaction-chart-container">
                 <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={transactionData}>
-                        <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <Tooltip formatter={(value) => `${value} transactions`} contentStyle={{ backgroundColor: "#4CAF50", color: "#fff", borderRadius: "5px", border: "none"}} />
+                        <Tooltip formatter={(value) => `${value} transactions`} contentStyle={{ color: 'black' }} />
                         <Legend />
                         <Bar dataKey="count" fill="green" name="Transactions" />
                     </BarChart>

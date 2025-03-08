@@ -2,7 +2,7 @@
   padding: 1.5rem;
 }
 
-.setting-heading{
+.setting-heading {
   display: flex;
   justify-content: end;
   margin-bottom: 10px;
@@ -25,7 +25,7 @@
 
 .theme-toggle-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--bg-color);
 }
 
 /* Settings Grid */
@@ -155,7 +155,7 @@
   .two-column-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   /* Responsive adjustments for theme toggle */
   .settings-header {
     flex-direction: row;
@@ -170,7 +170,7 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .theme-toggle-btn {
     align-self: flex-end;
   }
@@ -190,7 +190,9 @@
   margin-bottom: 1rem;
 }
 
-.notification-options, .security-options, .support-options {
+.notification-options,
+.security-options,
+.support-options {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -239,15 +241,15 @@
   transition: transform 0.3s, border-color 0.3s;
 }
 
-.toggle-input:checked + .toggle-slider {
+.toggle-input:checked+.toggle-slider {
   background-color: var(--button-color);
 }
 
-.toggle-input:focus + .toggle-slider {
+.toggle-input:focus+.toggle-slider {
   box-shadow: 0 0 0 2px var(--box-shadow);
 }
 
-.toggle-input:checked + .toggle-slider:after {
+.toggle-input:checked+.toggle-slider:after {
   transform: translateX(1.25rem);
   border-color: var(--button-color);
 }
@@ -274,7 +276,7 @@
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   background-color: var(--button-color);
-    color: var(--text-color);
+  color: var(--text-color);
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;

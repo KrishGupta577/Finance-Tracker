@@ -48,6 +48,7 @@ const StoreContextProvider = (props) => {
             const response = await axios.get(url + "/api/user/info", { headers: { token } })
             if (response.data.userInfo) {
                 setUserInfo(response.data.userInfo)
+                setColorTheme(response.data.userInfo.preferences.theme)
             }
         } catch (error) {
             console.log(error)

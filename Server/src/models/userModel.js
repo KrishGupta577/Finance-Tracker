@@ -41,9 +41,12 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
+  preferences:{
+    theme: { type: String, enum: ['light', 'dark'], default: 'light' },
+  }
 },
   {
-    timestamps: true, // Automatically adds 'createdAt' and 'updatedAt' fields
+    timestamps: true, 
   })
 
 
