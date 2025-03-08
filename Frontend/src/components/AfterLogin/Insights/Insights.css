@@ -5,7 +5,7 @@
 .insights-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
 }
 
@@ -17,9 +17,9 @@
 
 
 .insights-card {
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     padding: 1.5rem;
 }
 

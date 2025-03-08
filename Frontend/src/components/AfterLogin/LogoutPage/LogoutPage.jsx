@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { LogOut, AlertCircle, Check, ChevronLeft } from 'lucide-react';
+import { LogOut, AlertCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import "./LogoutPage.css"
 
@@ -8,7 +8,7 @@ function LogoutPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutComplete, setLogoutComplete] = useState(false);
   const navigate = useNavigate()
-  
+
   const handleLogout = () => {
     setIsLoggingOut(true);
     sessionStorage.clear()
@@ -17,13 +17,13 @@ function LogoutPage() {
     setTimeout(() => {
       setIsLoggingOut(false);
       setLogoutComplete(true);
-    
+
       setTimeout(() => {
-         navigate("/")
+        navigate("/")
       }, 2000);
     }, 1500);
   };
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,7 +33,7 @@ function LogoutPage() {
       }
     }
   };
-  
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -41,7 +41,7 @@ function LogoutPage() {
       opacity: 1
     }
   };
-  
+
   return (
     <div className="logout-page-container">
       <motion.div
@@ -57,15 +57,15 @@ function LogoutPage() {
                 <LogOut size={36} />
               </div>
             </motion.div>
-            
+
             <motion.h2 variants={itemVariants}>Ready to Log Out?</motion.h2>
-            
+
             <motion.p variants={itemVariants} className="logout-message">
               Your financial data is safely stored. You can return anytime by logging back in.
             </motion.p>
-            
+
             <motion.div variants={itemVariants} className="logout-actions">
-              <button 
+              <button
                 className="logout-button"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
@@ -83,14 +83,14 @@ function LogoutPage() {
                 )}
               </button>
             </motion.div>
-            
+
             <motion.div variants={itemVariants} className="logout-notice">
               <AlertCircle size={16} />
               <span>You'll need to sign in again to access your account</span>
             </motion.div>
           </>
         ) : (
-          <motion.div 
+          <motion.div
             className="logout-success"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

@@ -24,16 +24,16 @@
 .sort-label {
   font-size: 18px;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-color);
 }
 
 .sort-select {
   padding: 6px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  background-color: white;
+  background-color: var(--bg-color);
   font-size: 14px;
-  color: #111827;
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.2s ease;
   min-width: 140px;
@@ -92,7 +92,7 @@
 }
 
 .transactions-table-header {
-  background-color: #f9fafb;
+  background-color: var(--bg-color);
 }
 
 .table-header-cell {
@@ -107,7 +107,7 @@
 }
 
 .transactions-table-body {
-  background-color: white;
+  background-color: var(--bg-color);
 }
 
 .transaction-row {
@@ -122,19 +122,11 @@
   padding: 1rem 1.5rem;
   white-space: nowrap;
   font-size: 0.875rem;
+  color: var(--text-color);
 }
 
 .description-cell {
   font-weight: 500;
-  color: #111827;
-}
-
-.category-cell {
-  color: #4b5563;
-}
-
-.date-cell {
-  color: #6b7280;
 }
 
 .amount-container {

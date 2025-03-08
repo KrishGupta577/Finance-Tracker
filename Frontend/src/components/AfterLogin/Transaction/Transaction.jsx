@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 function Transaction() {
 
-  const { register, watch, handleSubmit, formState: { errors } } = useForm();
+  const { register, watch,formState: { errors } } = useForm();
   const { url, token, transactions, refreshTransactions } = useContext(StoreContext)
   const [showAddTran, setShowAddTran] = useState(false);
   const [editTransactionId, setEditTransactionId] = useState(null);
@@ -19,7 +19,7 @@ function Transaction() {
   const sortOrder = watch('sortOrder')
 
   const sortedTransactions = () => {
-    const sortedData = [...transactions]; // Create a shallow copy to avoid mutating the original array
+    const sortedData = [...transactions];
     if (sortBy && sortOrder) {
       sortedData.sort((a, b) => {
         const fieldA = a[sortBy];
@@ -58,7 +58,6 @@ function Transaction() {
       {showAddTran && <AddTransaction setShowAddTran={setShowAddTran} />}
 
       <div className="transactions-header">
-        <h1 className="transactions-title">Transactions</h1>
         <div className="sort-controls">
           <div className="sort-group">
             <label htmlFor="sortBy" className="sort-label">
@@ -67,11 +66,9 @@ function Transaction() {
             <select
               id="sortBy"
               name='sortBy' {...register('sortBy')}
-              // value={sortBy}
-              // onChange={(e) => setSortBy(e.target.value)}
               className="sort-select"
             >
-              <option value="createdAt">Date</option>
+              <option value="date">Date</option>
               <option value="comment">Description</option>
               <option value="category">Category</option>
               <option value="expense_category">Expense Category</option>
@@ -85,8 +82,6 @@ function Transaction() {
             <select
               id="sortOrder"
               name='sortOrder'  {...register('sortOrder')}
-              // value={sortOrder}
-              // onChange={(e) => setSortOrder(e.target.value)}
               className="sort-select"
             >
               <option value="asc">Ascending</option>

@@ -1,9 +1,11 @@
 .hero {
     height: auto;
-    min-height: 600px;
+    min-height: 550px;
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
+    background-color: var(--bg-color);
+    border-bottom: 2px solid var(--border-color)
 }
 
 .hero-left {
@@ -30,7 +32,7 @@
     text-decoration: none;
     width: 120px;
     text-align: center;
-    color: white;
+    color: var(--text-color);
     background-color: var(--button-color);
     font-weight: 600;
     transition: 0.5s;

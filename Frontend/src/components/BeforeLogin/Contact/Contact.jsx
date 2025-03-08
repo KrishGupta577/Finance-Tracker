@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Contact.css"
+import { Instagram, Linkedin, Twitter } from 'lucide-react'
 
 const Contact = () => {
     return (
@@ -11,9 +12,9 @@ const Contact = () => {
                 <a href='mailto:financetracker555@gmail.com' className='contact-left-email'>financetracker555@gmail.com</a>
                 <p className='contact-left-phone'>Tel: 123-456-7890</p>
                 <div className='contact-left-icons'>
-                    <a href=""><img src="/linkdin-icon.svg" alt="linkdin" /></a>
-                    <a href=""><img src="/instagram-icon.svg" alt="instagram" /></a>
-                    <a href=""><img src="/x-icon.svg" alt="X" /></a>
+                    <a href=""><Linkedin /></a>
+                    <a href=""><Instagram /></a>
+                    <a href=""><Twitter /></a>
                 </div>
             </div>
             <div className='contact-center'>
@@ -26,8 +27,8 @@ const Contact = () => {
             <div className='contact-right'>
                 <h3>Give Us a Feedback</h3>
                 <div className='contact-right-feedback'>
-                    <input className='contact-right-feedback-email' type="email" name="" placeholder='Email'/>
-                    <input className='contact-right-feedback-input' type="text" name="" placeholder='Write a review'/>
+                    <input className='contact-right-feedback-email' type="email" name="" placeholder='Email' />
+                    <input className='contact-right-feedback-input' type="text" name="" placeholder='Write a review' />
                     <button type='submit'>SEND</button>
                 </div>
             </div>

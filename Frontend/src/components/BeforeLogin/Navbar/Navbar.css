@@ -6,6 +6,7 @@
     background-color: var(--bg-color);
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .navbar-left {

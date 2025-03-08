@@ -9,6 +9,17 @@
   --border-color: rgb(102, 187, 106);
 }
 
+[data-theme='dark'] {
+  --bg-color: rgb(18, 18, 18);
+  --text-color: rgb(200, 200, 200);
+  --button-color: rgb(56, 142, 60);
+  --button-hover-color: rgb(46, 125, 50);
+  --secondary-bg-color: rgb(28, 28, 28);
+  --secondary-text-color: rgb(130, 130, 130);
+  --input-bg-color: rgb(38, 50, 56);
+  --border-color: rgb(76, 175, 80);
+}
+
 * {
   padding: 0;
   margin: 0;

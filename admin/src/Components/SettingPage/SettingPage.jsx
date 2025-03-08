@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Bell, Lock, User, CreditCard, HelpCircle } from 'lucide-react';
+import { Bell, Lock, User, CreditCard, HelpCircle, Moon, Sun } from 'lucide-react';
 import './SettingPage.css';
+import { StoreContext } from '../../Context/StoreContext';
 
-const SettingPage = () => {
-  
+function Setting() {
+
+  const { colorTheme, setColorTheme } = useContext(StoreContext)
+
+  const toggleTheme = () => {
+    setColorTheme(colorTheme === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -12,6 +19,11 @@ const SettingPage = () => {
       exit={{ opacity: 0, y: 20 }}
       className="settings-container"
     >
+      <div className='setting-heading'>
+        <button className="theme-toggle-btn" onClick={toggleTheme}>
+          {colorTheme === 'light' ? <Moon /> : <Sun />} {colorTheme === 'light' ? 'Dark Mode' : 'Light Mode'}
+        </button>
+      </div>
       <div className="settings-grid">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -57,6 +69,33 @@ const SettingPage = () => {
         </motion.div>
 
         <div className="two-column-grid">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="settings-card"
+          >
+            <div className="card-section-header">
+              <Bell className="section-icon" />
+              <h2 className="section-title">Notifications</h2>
+            </div>
+            <div className="notification-options">
+              <div className="toggle-option">
+                <span>Email Notifications</span>
+                <label className="toggle-switch">
+                  <input type="checkbox" className="toggle-input" />
+                  <div className="toggle-slider"></div>
+                </label>
+              </div>
+              <div className="toggle-option">
+                <span>Push Notifications</span>
+                <label className="toggle-switch">
+                  <input type="checkbox" className="toggle-input" defaultChecked />
+                  <div className="toggle-slider"></div>
+                </label>
+              </div>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,6 +129,16 @@ const SettingPage = () => {
         >
           <div className="settings-card">
             <div className="card-section-header">
+              <CreditCard className="section-icon" />
+              <h2 className="section-title">Payment Methods</h2>
+            </div>
+            <button className="primary-button">
+              Add Payment Method
+            </button>
+          </div>
+
+          <div className="settings-card">
+            <div className="card-section-header">
               <HelpCircle className="section-icon" />
               <h2 className="section-title">Help & Support</h2>
             </div>
@@ -111,4 +160,4 @@ const SettingPage = () => {
   );
 }
 
-export default SettingPage;
+export default Setting;

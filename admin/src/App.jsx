@@ -4,8 +4,17 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
+import { useContext } from 'react';
+import { StoreContext } from './Context/StoreContext';
+import { useEffect } from 'react';
 
 function App() {
+
+  const { colorTheme } = useContext(StoreContext)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', colorTheme);
+  }, [colorTheme]);
 
   return (
     <>

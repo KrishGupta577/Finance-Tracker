@@ -10,7 +10,11 @@ import ExpenseForm from './components/AfterLogin/ExpenseForm/ExpenseForm';
 
 function App() {
 
-  const { url, token } = useContext(StoreContext)
+  const {colorTheme} = useContext(StoreContext)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', colorTheme);
+  }, [colorTheme]);
 
   return (
     <>

@@ -9,6 +9,7 @@ const StoreContextProvider = (props) => {
   const [transactions, setTransactions] = useState([])
   const url = 'http://localhost:5000'
   const [token, setToken] = useState('')
+  const [colorTheme, setColorTheme] = useState('light')
   const tokenKey = localStorage.getItem('token')
 
   const usersList = async (token) => {
@@ -47,10 +48,10 @@ const StoreContextProvider = (props) => {
   }, [token])
 
   useEffect(() => {
-    if(token){
+    if (token) {
       transactionsList(token)
     }
-  },[])
+  }, [])
 
   const contextValue = {
     url,
@@ -60,7 +61,9 @@ const StoreContextProvider = (props) => {
     transactionsList,
     users,
     transactions,
-    refreshUsers : () => {usersList(tokenKey)}
+    colorTheme,
+    setColorTheme,
+    refreshUsers: () => { usersList(tokenKey) }
   }
 
   return (

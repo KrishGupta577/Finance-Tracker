@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Bell, Lock, User, CreditCard, HelpCircle } from 'lucide-react';
+import { Bell, Lock, User, CreditCard, HelpCircle, Moon, Sun } from 'lucide-react';
 import './Setting.css';
+import { StoreContext } from '../../../context/StoreContext';
 
 function Setting() {
+
+  const { colorTheme, setColorTheme } = useContext(StoreContext)
+
+  const toggleTheme = () => {
+    setColorTheme(colorTheme === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -11,8 +19,11 @@ function Setting() {
       exit={{ opacity: 0, y: 20 }}
       className="settings-container"
     >
-      <h1 className="settings-title">Settings</h1>
-
+      <div className='setting-heading'>
+        <button className="theme-toggle-btn" onClick={toggleTheme}>
+          {colorTheme === 'light' ? <Moon /> : <Sun />} {colorTheme === 'light' ? 'Dark Mode' : 'Light Mode'}
+        </button>
+      </div>
       <div className="settings-grid">
         <motion.div
           initial={{ opacity: 0, x: -20 }}

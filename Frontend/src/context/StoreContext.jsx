@@ -8,6 +8,7 @@ const StoreContextProvider = (props) => {
     const [token, setToken] = useState('')
     const [transactions, setTransactions] = useState([])
     const [userInfo, setUserInfo] = useState({})
+    const [colorTheme,setColorTheme] = useState('light')
     const url = 'http://localhost:5000'
 
     const data = []
@@ -76,6 +77,8 @@ const StoreContextProvider = (props) => {
         userInfo,
         expenseCategories,
         data,
+        colorTheme,
+        setColorTheme,
         refreshTransactions: () => transactionList(token),
         refreshUserInfo: () => userInfoFunction(token)
     }

@@ -2,7 +2,7 @@
     width: 100%;
     padding: 20px 0;
     background-color: transparent;
-    color: #333;
+    color: var(--bg-color);
     box-shadow: none;
 }
 
@@ -17,12 +17,12 @@
     font-size: 32px;
     font-weight: 600;
     margin: 20px 0 10px;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 .mobile-app-header p {
     font-size: 16px;
-    color: #6c757d;
+    color: var(--text-color);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -36,31 +36,26 @@
     flex-wrap: wrap;
 }
 
-.feature-card-container{
+.feature-card-container {
     transition: all 0.5s;
 }
 
-.feature-card-container:hover{
+.feature-card-container:hover {
     transform: scale(1.05);
-    /* transform: translateY(-3px); */
 }
 
 .feature-card {
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 8px;
     padding: 25px;
     width: 320px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--box-shadow);
     transition: all 0.5s;
     cursor: pointer;
 }
 
-.feature-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
 .feature-icon {
-    background-color: #f7f9fa;
+    background-color: var(--bg-color);
     height: 60px;
     width: 60px;
     border-radius: 50%;
@@ -68,18 +63,17 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
-    color: #4caf50;
     /* Matching the green in your dashboard */
 }
 
 .feature-card h3 {
     font-size: 18px;
     margin-bottom: 8px;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 .feature-card p {
-    color: #6c757d;
+    color: var(--text-color);
     line-height: 1.5;
     font-size: 14px;
 }
@@ -115,7 +109,6 @@
 
 .download-button.android {
     background-color: #4caf50;
-    /* Matching the green in your dashboard */
 }
 
 .button-text {
@@ -173,10 +166,4 @@
         align-items: center;
         gap: 10px;
     }
-}
-
-/* Sidebar integration styling */
-.mobile-app-sidebar-active {
-    background-color: #4caf50;
-    color: white;
 }
