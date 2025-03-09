@@ -3,13 +3,18 @@ import { motion } from 'framer-motion';
 import { Bell, Lock, User, CreditCard, HelpCircle, Moon, Sun } from 'lucide-react';
 import './SettingPage.css';
 import { StoreContext } from '../../Context/StoreContext';
+import axios from 'axios';
 
 function Setting() {
 
-  const { colorTheme, setColorTheme } = useContext(StoreContext)
+  const { colorTheme, setColorTheme,url, token } = useContext(StoreContext)
+  let theme = 'light'
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     setColorTheme(colorTheme === 'light' ? 'dark' : 'light');
+    const theme = colorTheme === 'light' ? 'dark' : 'light';
+
+    await axios.post(url + '/api/admin/preferences', {theme}, { headers: { token } });
   };
 
   return (
@@ -20,7 +25,7 @@ function Setting() {
       className="settings-container"
     >
       <div className='setting-heading'>
-        <button className="theme-toggle-btn" onClick={toggleTheme}>
+        <button className="theme-toggle-btn" onClick={() => {toggleTheme()}}>
           {colorTheme === 'light' ? <Moon /> : <Sun />} {colorTheme === 'light' ? 'Dark Mode' : 'Light Mode'}
         </button>
       </div>

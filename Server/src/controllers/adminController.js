@@ -60,10 +60,48 @@ const transactionsList = async (req, res) => {
 
         res.json({ success: true, transactionsList })
 
-    } catch (error) {       
+    } catch (error) {
         res.json({ success: false, message: "Error" })
     }
 }
 
+const changeTheme = async (req, res) => {
+    const { userId, theme } = req.body;
+    
+    try {
+        const user = await adminModel.findByIdAndUpdate(
+            userId,
+            { 'preferences.theme': theme },
+            { new: true }
+        );
+        res.json({ success: true, message: 'Preferences updated', preferences: user.preferences });
 
-export { adminLogin, usersList, transactionsList }
+        console.log(user)
+    } catch (error) {
+        res.json({ error: 'Failed to update preferences' });
+        console.log(error)
+    }
+}
+
+const sendAdminInfo = async (req, res) => {
+    try {
+        const { userId } = req.body
+
+        console.log(userId)
+
+        const adminInfo = await adminModel.findOne({ _id: userId })
+
+        if(!adminInfo){
+            return res.json({ success: false, message: "Some error occured." })
+        }
+
+            res.json({ success: true, adminInfo })
+       
+    } catch (error) {
+        res.json({ success: false, message: "Error." })
+        console.log(error)
+    }
+}
+
+
+export { adminLogin, usersList, transactionsList, changeTheme, sendAdminInfo }

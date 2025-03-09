@@ -20,8 +20,7 @@ import TransactionsPage from '../../Components/TransactionsPage/TransactionsPage
 const Dashboard = () => {
     const location = useLocation();
 
-    const { usersList, transactionsList } = useContext(StoreContext)
-    const token = localStorage.getItem('token')
+    const { usersList, transactionsList, adminInfo, token } = useContext(StoreContext)
 
     useEffect(() => {
         usersList(token)
@@ -88,7 +87,7 @@ const Dashboard = () => {
                                 referrerPolicy="no-referrer"
                             />
                             <div>
-                                <h3 className="profile-name">John Doe</h3>
+                                <h3 className="profile-name">{adminInfo.name}</h3>
                             </div>
                         </div>
                     </div>

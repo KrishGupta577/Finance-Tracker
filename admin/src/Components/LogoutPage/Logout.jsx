@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LogOut, AlertCircle, Check, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import "./Logout.css"
+import { StoreContext } from '../../Context/StoreContext';
 
 function LogoutPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);

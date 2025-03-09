@@ -7,9 +7,7 @@ import { StoreContext } from "../../Context/StoreContext";
 import './UsersList.css';
 
 function UsersList() {
-  const { users, transactions, url, refreshUsers } = useContext(StoreContext);
-
-  const token = localStorage.getItem('token')
+  const { users, transactions, url, refreshUsers, token } = useContext(StoreContext);
 
   const transactionCount = (id) => {
     return transactions

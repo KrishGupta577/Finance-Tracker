@@ -46,7 +46,7 @@ const StoreContextProvider = (props) => {
     const userInfoFunction = async (token) => {
         try {
             const response = await axios.get(url + "/api/user/info", { headers: { token } })
-            if (response.data.userInfo) {
+            if (response.data.success) {
                 setUserInfo(response.data.userInfo)
                 setColorTheme(response.data.userInfo.preferences.theme)
             }

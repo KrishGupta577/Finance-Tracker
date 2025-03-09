@@ -8,9 +8,9 @@ const StoreContextProvider = (props) => {
   const [users, setUsers] = useState([])
   const [transactions, setTransactions] = useState([])
   const url = 'http://localhost:5000'
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState(localStorage.getItem('token') || '')
   const [colorTheme, setColorTheme] = useState('light')
-  const tokenKey = localStorage.getItem('token')
+  const [adminInfo, setAdminInfo] = useState({})
 
   const usersList = async (token) => {
     try {
@@ -41,6 +41,19 @@ const StoreContextProvider = (props) => {
     }
   }
 
+  const adminInfoFunction = async (token) => {
+
+    try {
+      const response = await axios.get(url + "/api/admin/admin-info", { headers: { token } })
+      if (response.data.success) {
+        setAdminInfo(response.data.adminInfo)
+        setColorTheme(response.data.adminInfo.preferences.theme)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token)
@@ -49,9 +62,16 @@ const StoreContextProvider = (props) => {
 
   useEffect(() => {
     if (token) {
+      adminInfoFunction(token);
+    }
+  }, [token]);
+
+
+  useEffect(() => {
+    if (token) {
       transactionsList(token)
     }
-  }, [])
+  }, [token])
 
   const contextValue = {
     url,
@@ -63,7 +83,9 @@ const StoreContextProvider = (props) => {
     transactions,
     colorTheme,
     setColorTheme,
-    refreshUsers: () => { usersList(tokenKey) }
+    adminInfo,
+    setAdminInfo,
+    refreshUsers: () => { usersList(token) }
   }
 
   return (
