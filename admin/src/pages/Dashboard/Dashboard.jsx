@@ -95,11 +95,6 @@ const Dashboard = () => {
 
                 {/* Routes */}
 
-                {/*
-                <Route path="reports" element={<Reports />} />
-                <Route path="mobile-app" element={<MobileApp />} /> 
-                */}
-
                 <Routes>
                     <Route index element={<OverviewPage />} />
                     <Route path="transactions" element={<TransactionsPage />} />
