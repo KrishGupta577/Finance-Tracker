@@ -17,7 +17,19 @@ import { useNavigate } from 'react-router-dom';
 const ExpenseForm = () => {
 
     const { url, token, userInfo } = useContext(StoreContext)
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            name: userInfo?.name || '',
+        }
+    })
+
+    useEffect(() => {
+        reset({
+            name: userInfo?.name || '',
+        });
+    }, [userInfo, reset]);
+
+
     const navigate = useNavigate()
     const getFirstError = () => {
         if (errors) {
@@ -77,7 +89,7 @@ const ExpenseForm = () => {
         try {
             const response = await axios.post(url + "/api/user/getInfo", data, { headers: { token } })
             console.log(response)
-            if(response.data.success){
+            if (response.data.success) {
                 navigate("/dashboard")
             }
         } catch (error) {
@@ -115,7 +127,6 @@ const ExpenseForm = () => {
                                         type="text"
                                         name="name" {...register("name", formValidation.name)}
                                         placeholder="Full Name"
-                                        value={userInfo.name === undefined ? "" : userInfo.name}
                                         required
                                         className="expense-form-input-field"
                                     />

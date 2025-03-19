@@ -87,8 +87,6 @@ const sendAdminInfo = async (req, res) => {
     try {
         const { userId } = req.body
 
-        console.log(userId)
-
         const adminInfo = await adminModel.findOne({ _id: userId })
 
         if(!adminInfo){

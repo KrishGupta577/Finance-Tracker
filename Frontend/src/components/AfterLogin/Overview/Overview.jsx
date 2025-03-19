@@ -42,7 +42,7 @@ const Overview = () => {
                         <div className="stat-header">
                             <h3>Total Credits + Monthly Income</h3>
                         </div>
-                        <p className="stat-value">&#8377; {userInfo.monthly_income - totalCredits}</p>
+                        <p className="stat-value">&#8377; {userInfo.monthly_income + totalCredits}</p>
                     </div>
                     <div className="stat-card">
                         <div className="stat-header">

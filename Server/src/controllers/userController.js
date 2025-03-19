@@ -131,8 +131,6 @@ const userDelete = async (req, res) => {
 const changeTheme = async (req, res) => {
     const { userId, theme } = req.body;
 
-    console.log(req.body)
-
     try {
         const user = await userModel.findByIdAndUpdate(
             userId,
@@ -141,7 +139,6 @@ const changeTheme = async (req, res) => {
         );
         res.json({ success: true, message: 'Preferences updated', preferences: user.preferences });
 
-        console.log(user)
     } catch (error) {
         res.json({ error: 'Failed to update preferences' });
         console.log(error)

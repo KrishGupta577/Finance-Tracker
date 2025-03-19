@@ -7,14 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(62, 61, 61, 0.5);
+  background-color: var(--bg-popup);
   z-index: 1000;
 }
 
 .add-transaction-popup {
-  background-color: white;
+  background-color: var(--bg-color);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
   width: 90%;
   max-width: 500px;
   overflow: hidden;
@@ -29,19 +29,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .add-transaction-header h2 {
   margin: 0;
   font-size: 1.4rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #777;
+  color: var(--text-color);
   cursor: pointer;
   padding: 4px;
   border-radius: 50%;
@@ -49,7 +49,7 @@
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-color);
   transform: scale(1.1) rotate(90deg);
 }
 
@@ -83,20 +83,20 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
-  color: #555;
+  color: var(--text-color);
 }
 
 .form-input, .form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 1rem;
   transition: all 0.2s ease;
 }
 
 .form-input:focus, .form-textarea:focus {
-  border-color: #4a90e2;
+  border-color: var(--border-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
@@ -151,7 +151,7 @@ label {
 
 .submit-button {
   background-color: var(--button-color);
-  color: white;
+  color: white;   
 }
 
 .submit-button:hover {

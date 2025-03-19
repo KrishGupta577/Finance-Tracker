@@ -128,7 +128,7 @@ const Transaction = ({ setShowAddTran }) => {
                                 >
                                     <option value="">Select category</option>
                                     {expenseCategories.map((category) => (
-                                        <option key={category} value={category.toLowerCase()}>
+                                        <option key={category} value={category}>
                                             {category}
                                         </option>
                                     ))}
