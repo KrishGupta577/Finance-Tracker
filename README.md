@@ -14,13 +14,12 @@
 * **Settings Panel** - Adjust preferences, currency, and notification settings.
 
 ## 🏗️ Tech Stack
-* **Frontend:** React, Vite, Tailwind CSS
-* **Backend:** Node.js, Express.js
+* **Frontend:** React, Vite, CSS
+* **Backend:** Express.js
 * **Database:** MongoDB
-* **State Management:** Redux (or Context API)
-* **Charts & Graphs:** Chart.js / Recharts
-* **Authentication:** JWT / Firebase Auth
-* **Deployment:** Vercel / Netlify / AWS
+* **State Management:** Context API
+* **Charts & Graphs:** Recharts
+* **Authentication:** JWT
 
 ## 🎯 Navigation
 The Finance Tracker app consists of the following navigation options:
@@ -30,6 +29,15 @@ The Finance Tracker app consists of the following navigation options:
 4. **Transactions** - Add, edit, and view all transactions.
 5. **Settings** - Manage preferences, currency, and security.
 6. **Logout** - Securely exit the platform.
+
+## 🔐 Admin Panel
+The **Admin Panel** is a powerful feature designed for administrators to efficiently manage platform data and user accounts. It includes:
+* **User Management** - Add, edit, or delete user profiles.
+* **Transaction Control** - Monitor and modify transactions.
+* **Reports Management** - Generate and export detailed financial reports.
+* **Dashboard Analytics** - View summarized data insights for better decision-making.
+
+The **Admin Panel** can be accessed at: `http://localhost:8001/`
 
 ## 📥 Installation & Setup
 To run this project locally, follow these steps:
@@ -41,10 +49,12 @@ cd finance-tracker
 ### 2️⃣ Install Dependencies
 npm install
 
+### 3️⃣ Start the Frontend
+npm run dev
 
-The application will run at `http://localhost:5173/`
+The application will run at `http://localhost:8000/`
 
-### 4️⃣ Backend Setup (if applicable)
+### 4️⃣ Backend Setup
 1. Navigate to the backend directory:
 cd backend
 
