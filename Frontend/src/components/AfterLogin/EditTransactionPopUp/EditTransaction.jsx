@@ -80,37 +80,42 @@ const EditTransaction = ({ setShowEditTran, id }) => {
                     <h2>Edit Transaction</h2>
                     <button
                         onClick={() => setShowEditTran(false)}
-                        className="close-button"
+                        className="add-transaction-close-button"
                     >
                         <X size={24} />
                     </button>
                 </div>
 
                 <form onSubmit={handleSubmit(onHandleSubmit, onHandleError)}>
-                    <div className="form-group">
-                        <div className="input-icon">
+                    <div className="add-transaction-form-group">
+                        <div className="add-transaction-input-icon">
                             <IndianRupee size={20} />
                         </div>
-                        <div className="input-container">
+                        <div className="add-transaction-input-container">
                             <label htmlFor="amount">Amount</label>
                             <input
                                 type="number"
                                 id="amount"
                                 {...register("amount", editTransactionValidation.amount)}
                                 step="1"
-                                className="form-input"
+                                className="add-transaction-form-input"
                             />
+                            {errors.amount && (
+                                <div className="add-transaction-error-message">
+                                    {errors.amount.message}
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <div className="input-icon">
+                    <div className="add-transaction-form-group">
+                        <div className="add-transaction-input-icon">
                             <Tag size={20} color="blue" />
                         </div>
-                        <div className="input-container">
+                        <div className="add-transaction-input-container">
                             <label htmlFor="category">Category</label>
-                            <div className="radio-group">
-                                <div className="radio-option">
+                            <div className="add-transaction-radio-group">
+                                <div className="add-transaction-radio-option">
                                     <input
                                         type="radio"
                                         id="expense"
@@ -119,7 +124,7 @@ const EditTransaction = ({ setShowEditTran, id }) => {
                                     />
                                     <label htmlFor="expense">Expense</label>
                                 </div>
-                                <div className="radio-option">
+                                <div className="add-transaction-radio-option">
                                     <input
                                         type="radio"
                                         id="income"
@@ -129,18 +134,23 @@ const EditTransaction = ({ setShowEditTran, id }) => {
                                     <label htmlFor="income">Income</label>
                                 </div>
                             </div>
+                            {errors.category && (
+                                <div className="add-transaction-error-message">
+                                    {errors.category.message}
+                                </div>
+                            )}
                         </div>
                     </div>
 
                     {selectedCategory === "expense" && (
-                        <div className="form-group">
-                            <div className="input-icon">
+                        <div className="add-transaction-form-group">
+                            <div className="add-transaction-input-icon">
                                 <Tag size={20} />
                             </div>
-                            <div className="input-container">
+                            <div className="add-transaction-input-container">
                                 <label>Expense Category</label>
                                 <select
-                                    className="form-select"
+                                    className="add-transaction-form-select"
                                     {...register("expenseType", editTransactionValidation.expenseType)}
                                 >
                                     <option value="">Select category</option>
@@ -153,34 +163,39 @@ const EditTransaction = ({ setShowEditTran, id }) => {
                                         </option>
                                     ))}
                                 </select>
+                                {errors.expenseType && (
+                                    <div className="add-transaction-error-message">
+                                        {errors.expenseType.message}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}
 
-                    <div className="form-group">
-                        <div className="input-icon">
+                    <div className="add-transaction-form-group">
+                        <div className="add-transaction-input-icon">
                             <MessageSquare size={20} color="purple" />
                         </div>
-                        <div className="input-container">
+                        <div className="add-transaction-input-container">
                             <label htmlFor="comment">Comment</label>
                             <textarea
                                 id="comment"
                                 {...register("comment", editTransactionValidation.comment)}
                                 placeholder="Add a comment (optional)"
                                 rows="2"
-                                className="form-textarea"
+                                className="add-transaction-form-textarea"
                             />
                         </div>
                     </div>
 
-                    <div className="form-actions">
+                    <div className="add-transaction-form-actions">
                         <button
                             type="submit"
-                            className="submit-button"
+                            className="add-transaction-submit-button"
                             disabled={isLoading}
                         >
                             {isLoading ? (
-                                <div className="loading-spinner" />
+                                <div className="add-transaction-loading-spinner" />
                             ) : (
                                 'Update Transaction'
                             )}

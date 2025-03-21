@@ -185,6 +185,109 @@
   background-color: var(--button-hover-color);
   transform: scale(1.05);
 }
+/* Delete Account Section Styles */
+.delete-account-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.delete-account-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+}
+
+.delete-account-warning {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 87, 87, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: #ff5757;
+  font-size: 0.9rem;
+}
+
+.warning-icon {
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.75rem;
+}
+
+.delete-account-btn {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-account-btn:hover {
+  background-color: #ff3636;
+}
+
+.delete-confirmation {
+  margin-top: 1rem;
+}
+
+.delete-confirm-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+  background-color: var(--bg-color);
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancel-delete-btn {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+}
+
+.confirm-delete-btn {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 2;
+}
+
+.confirm-delete-btn:disabled {
+  background-color: #ffacac;
+  cursor: not-allowed;
+}
+
+/* Upload error message styles */
+.upload-error-message {
+  color: #ff5757;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 87, 87, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
 
 /* Responsive adjustments */
 @media (max-width: 640px) {

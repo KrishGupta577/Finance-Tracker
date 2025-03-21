@@ -1,9 +1,9 @@
 import express from 'express';
 import multer from 'multer';
-import cloudinary from '../config/cloudinary.js';
-import fs from 'fs';
+import authMiddleware from '../middlewares/auth.js';
+import { uploadProfilePhoto } from '../controllers/uploadController.js';
 
-const router = express.Router();
+const uploadRouter = express.Router();
 
 // Multer Storage (Memory Storage)
 const storage = multer.memoryStorage();
@@ -19,27 +19,32 @@ const upload = multer({
     }
 });
 
-router.post('/upload', upload.single('image'), async (req, res) => {
-    try {
-        // Validation: Check if file exists
-        if (!req.file) {
-            return res.status(400).json({ error: 'No file uploaded' });
+const handleMulterErrors = (err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+        // Handle Multer-specific errors
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            return res.json({ success: false, message: 'File Size limit 2MB' })
         }
-
-        // Upload image to Cloudinary
-        const result = await cloudinary.uploader.upload_stream(
-            { folder: 'profile_pictures' },
-            (error, cloudinaryResult) => {
-                if (error) {
-                    return res.status(500).json({ error: 'Upload to Cloudinary failed' });
-                }
-                res.json({ imageUrl: cloudinaryResult.secure_url , success:true, message: "Profile Photo Uploaded"});
-            }
-        ).end(req.file.buffer); // Upload from memory
-
-    } catch (error) {
-        res.status(500).json({ error: error.message || 'Upload failed' });
+    } else if (err) {
+        // Handle custom errors from fileFilter
+        return res.json({ success: false, message: err })
     }
-});
+    next();
+};
 
-export default router;
+uploadRouter.post(
+    '/profile-photo',
+    (req, res, next) => {
+        upload.single('profile_picture')(req, res, (err) => {
+            if (err) {
+                return handleMulterErrors(err, req, res, next);
+            }
+            next();
+        });
+    },
+    authMiddleware,
+    uploadProfilePhoto
+);
+
+export default uploadRouter
+

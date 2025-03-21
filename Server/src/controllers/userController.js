@@ -53,12 +53,12 @@ const userLogin = async (req, res) => {
 
         const user = await userModel.findOne({ email: username })
 
-        if (user.login_type === "google") {
-            return res.json({ success: false, message: "User is registered using Google" })
-        }
-
         if (!user) {
             return res.json({ success: false, message: "User Doesn't exists." })
+        }
+
+        if (user.login_type === "google") {
+            return res.json({ success: false, message: "User is registered using Google" })
         }
 
         const isMatch = await bcrypt.compare(password, user.password)
@@ -113,9 +113,8 @@ const userGoogleLogin = async (req, res) => {
 
 const userDelete = async (req, res) => {
     try {
-        const { id } = req.body
-        console.log(id)
-        const user = await userModel.findByIdAndDelete(id)
+        const { userId } = req.body
+        const user = await userModel.findByIdAndDelete(userId)
 
         if (!user) {
             return res.json({ success: false, message: 'User not found.' })
@@ -145,4 +144,67 @@ const changeTheme = async (req, res) => {
     }
 }
 
-export { registerUser, userLogin, userGoogleLogin, userDelete, changeTheme }
+const profileUpdate = async (req, res) => {
+
+    const { userId, name, monthly_income } = req.body
+
+    try {
+
+        const user = await userModel.findByIdAndUpdate(
+            userId,
+            {
+                name: name,
+                monthly_income: monthly_income
+            },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.json({ success: false, message: 'Profile not Updated' })
+        }
+
+        res.json({ success: true, message: 'Profile Updated' })
+
+
+    } catch (error) {
+        return res.json({ success: false, message: 'Error' })
+    }
+}
+
+const changePassword = async (req, res) => {
+
+    const { userId, currentPassword, newPassword} = req.body
+    try {
+        const user = await userModel.findById(userId)
+
+        if (user.login_type == 'google') {
+            return res.json({ success: false, message: 'Cannot change Password as User Is logged in using Google.' })
+        }
+
+        const isMatch = await bcrypt.compare(currentPassword, user.password)
+        const newPassMatch = await bcrypt.compare(newPassword, user.password)
+
+        console.log(newPassMatch)
+
+        if (!isMatch) {
+            return res.json({ success: false, message: 'Current Password is Incorrect' })
+        }
+
+        if (newPassMatch) {
+            return res.json({ success: false, message: 'New password must be different from the current password' })
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        const password = await bcrypt.hash(newPassword, salt)
+
+        user.password = password
+        user.save()
+
+        res.json({ success: true, message: 'Password Changed.' })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export { registerUser, userLogin, userGoogleLogin, userDelete, changeTheme, profileUpdate, changePassword }

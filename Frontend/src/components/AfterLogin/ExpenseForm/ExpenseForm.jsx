@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     User,
     Mail,
@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 const ExpenseForm = () => {
 
     const { url, token, userInfo } = useContext(StoreContext)
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit,reset, formState: { errors } } = useForm({
         defaultValues: {
             name: userInfo?.name || '',
         }

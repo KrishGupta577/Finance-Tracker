@@ -15,6 +15,7 @@ const PORT = process.env.PORT
 
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 
 connectDB()
 
@@ -22,7 +23,7 @@ app.use("/api/user",userRouter)
 app.use("/api/user",infoRoute)
 app.use("/api/transaction",transactionRoute)
 app.use("/api/admin",adminRouter)
-app.use('/api',uploadRouter)
+app.use('/api/upload',uploadRouter)
 
 app.get('/',(req,res) => {
     res.send("Welcome to the Finance Tracker")
