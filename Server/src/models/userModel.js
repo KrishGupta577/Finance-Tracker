@@ -18,7 +18,9 @@ const userSchema = new mongoose.Schema({
     required: function () {
       return this.login_type === 'google'; // Google ID is required if login_type is "google"
     },
-    default: ""
+    default: null,  // Change from "" to null
+    unique: true,   // Ensure uniqueness
+    sparse: true   // Allows multiple null values without triggering unique errors
   },
   name: {
     type: String,
@@ -41,12 +43,12 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
-  preferences:{
+  preferences: {
     theme: { type: String, enum: ['light', 'dark'], default: 'light' },
   }
 },
   {
-    timestamps: true, 
+    timestamps: true,
   })
 
 
