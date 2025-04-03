@@ -1,6 +1,6 @@
 import express from "express"
 import authMiddleware from "../middlewares/auth.js"
-import { getInfo, sendInfo } from "../controllers/InfoController.js"
+import { getInfo, sendInfo } from "../controllers/infoController.js"
 
 const infoRoute = express.Router()
 

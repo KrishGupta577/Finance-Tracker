@@ -1,4 +1,3 @@
-import { trusted } from 'mongoose';
 import cloudinary from '../config/cloudinary.js';
 import userModel from '../models/userModel.js';
 
