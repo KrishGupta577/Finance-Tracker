@@ -7,7 +7,7 @@ const StoreContextProvider = (props) => {
 
   const [users, setUsers] = useState([])
   const [transactions, setTransactions] = useState([])
-  const url = 'https://finance-tracker-67rr.onrender.com'
+  const url = 'http://localhost:5000'
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const [colorTheme, setColorTheme] = useState('light')
   const [adminInfo, setAdminInfo] = useState({})

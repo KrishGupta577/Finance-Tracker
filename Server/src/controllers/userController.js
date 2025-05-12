@@ -113,8 +113,8 @@ const userGoogleLogin = async (req, res) => {
 
 const userDelete = async (req, res) => {
     try {
-        const { userId } = req.body
-        const user = await userModel.findByIdAndDelete(userId)
+        const { userId, id } = req.body
+        const user = await userModel.findByIdAndDelete(id)
 
         if (!user) {
             return res.json({ success: false, message: 'User not found.' })
@@ -173,7 +173,7 @@ const profileUpdate = async (req, res) => {
 
 const changePassword = async (req, res) => {
 
-    const { userId, currentPassword, newPassword} = req.body
+    const { userId, currentPassword, newPassword } = req.body
     try {
         const user = await userModel.findById(userId)
 
