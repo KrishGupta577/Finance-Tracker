@@ -1,13 +1,11 @@
 {
-    "functions": {
-        "api/server.js": {
-            "runtime": "@vercel/node@3.0.7"
-        }
-    },
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/api/server.js"
-        }
-    ]
+  "functions": {
+    "api/server.js": {}
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/server.js"
+    }
+  ]
 }
