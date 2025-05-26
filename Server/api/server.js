@@ -9,16 +9,15 @@ import infoRoute from "../src/routes/infoRoute.js"
 import transactionRoute from "../src/routes/transactionRoute.js"
 import adminRouter from "../src/routes/adminRoute.js"
 import uploadRouter from "../src/routes/uploadRoutes.js"
-import serverless from "serverless-http";
 
 const app = express()
-const PORT = process.env.PORT
 
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 
-connectDB()
+// Connect to database
+await connectDB()
 
 app.use("/api/user", userRouter)
 app.use("/api/user", infoRoute)
@@ -30,4 +29,4 @@ app.get('/', (req, res) => {
     res.send("Welcome to the Finance Tracker")
 })
 
-export const handler = serverless(app);
+export default app;
