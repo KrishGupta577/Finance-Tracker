@@ -9,6 +9,7 @@ import infoRoute from "./src/routes/infoRoute.js"
 import transactionRoute from "./src/routes/transactionRoute.js"
 import adminRouter from "./src/routes/adminRoute.js"
 import uploadRouter from "./src/routes/uploadRoutes.js"
+import serverless from "serverless-http";
 
 const app = express()
 const PORT = process.env.PORT
@@ -29,7 +30,4 @@ app.get('/',(req,res) => {
     res.send("Welcome to the Finance Tracker")
 })
 
-app.listen(PORT,() => {
-    console.log(`Server started on http://localhost:${PORT}`);
-    
-})
+export const handler = serverless(app);
