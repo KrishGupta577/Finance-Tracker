@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
     const [transactions, setTransactions] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [colorTheme,setColorTheme] = useState('light')
-    const url = 'http://localhost:5000'
+    const url = 'https://finance-tracker-server-eight.vercel.app'
 
     const data = []
 
