@@ -1,11 +1,8 @@
 {
-  "functions": {
-    "api/server.js": {}
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/server.js"
-    }
-  ]
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/api/server.js"
+        }
+    ]
 }
