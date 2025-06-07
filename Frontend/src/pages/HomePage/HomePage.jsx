@@ -22,7 +22,8 @@ const HomePage = () => {
       console.log("navigating.............")
       navigate('/dashboard')
     }
-  },[])
+    toast.success("Note: The server may take up to 20 seconds to respond due to free hosting limitations. Thank you for your patience!")
+  }, [])
 
   return (
     <>
