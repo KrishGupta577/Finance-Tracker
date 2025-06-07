@@ -7,7 +7,6 @@ import Navbar from '../../components/BeforeLogin/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import AuthPage from '../../components/Authentication/AuthPage'
 import { useNavigate } from 'react-router-dom'
-import { StoreContext } from '../../context/StoreContext'
 
 
 const HomePage = () => {
